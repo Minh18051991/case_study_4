@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface IModuleRepository extends JpaRepository<MyModule, Integer> {
+public interface IMyModuleRepository extends JpaRepository<MyModule, Integer> {
     @Query(value = "select m.id as moduleId, m.name as moduleName\n" +
             "from student s \n" +
             "join class c on s.class_id = c.id\n" +
