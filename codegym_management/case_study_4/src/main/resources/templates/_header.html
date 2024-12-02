@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<th:block th:fragment="header">
+    <style>
+        /* CSS cho header */
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #f8f9fa !important;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+        .form-inline {
+            margin-right: 1rem;
+        }
+        .btn-outline-light:hover {
+            background-color: #f8f9fa;
+            color: #007bff;
+        }
+    </style>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand text-white" href="#">Brand</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Contact</a></li>
+                </ul>
+                <div class="navbar-right">
+                    <div sec:authorize="isAuthenticated()">
+                        <span sec:authentication='name'></span>
+                        <a class="btn btn-outline-light ml-2" href="/blog/logout">Logout</a>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()">
+                        <a class="btn btn-outline-light ml-2" href="/blog/login">Login</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+</th:block>
+</body>
+</html>
