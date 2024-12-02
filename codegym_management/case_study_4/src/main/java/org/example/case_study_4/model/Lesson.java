@@ -24,7 +24,7 @@ public class Lesson {
 
     @ManyToOne
     @JoinColumn(name = "module_id")
-    private Module module;
+    private MyModule module;
 
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Activity> activities = new HashSet<>();

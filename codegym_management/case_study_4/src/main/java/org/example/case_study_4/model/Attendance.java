@@ -32,7 +32,7 @@ public class Attendance {
 
     @ManyToOne
     @JoinColumn(name = "class_id")
-    private Class classEntity;
+    private Classes classEntity;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")

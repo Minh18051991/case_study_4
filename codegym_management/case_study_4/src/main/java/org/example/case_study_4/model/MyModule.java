@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "module")
 @Getter
 @Setter
-public class Module {
+public class MyModule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

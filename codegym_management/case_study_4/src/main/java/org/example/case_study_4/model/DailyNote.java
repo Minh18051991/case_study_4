@@ -29,5 +29,5 @@ public class DailyNote {
 
     @ManyToOne
     @JoinColumn(name = "class_id")
-    private Class classEntity;
+    private Classes classEntity;
 }

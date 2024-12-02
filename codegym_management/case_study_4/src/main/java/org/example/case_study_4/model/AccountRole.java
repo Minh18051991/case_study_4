@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Entity
 @Getter
@@ -17,8 +16,11 @@ public class AccountRole {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "role_id")
-    private Integer accountId;
-    @Column(name = "role_id")
-    private Integer roleId;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private AppRole role;
 }
