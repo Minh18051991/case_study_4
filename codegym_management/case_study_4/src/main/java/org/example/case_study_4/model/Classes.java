@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "class")
 @Getter
 @Setter
-public class Class {
+public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

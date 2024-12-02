@@ -8,7 +8,7 @@ import lombok.Setter;
 @Table(name = "role")
 @Getter
 @Setter
-public class Role {
+public class AppRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

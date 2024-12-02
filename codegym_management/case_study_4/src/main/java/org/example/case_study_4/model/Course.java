@@ -25,5 +25,5 @@ public class Course {
     private Boolean isDelete = false;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Module> modules = new HashSet<>();
+    private Set<MyModule> modules = new HashSet<>();
 }
