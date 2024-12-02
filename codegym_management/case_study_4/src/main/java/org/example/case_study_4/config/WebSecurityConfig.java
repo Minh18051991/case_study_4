@@ -1,3 +1,5 @@
+
+
 package org.example.case_study_4.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +46,19 @@ public class WebSecurityConfig {
 //         cấu hình có thể logout
         http.csrf(AbstractHttpConfigurer::disable);
         // tạo token cho method post
+
 //        http.csrf(Customizer.withDefaults());
 //        http.csrf((csrf) -> csrf
 //                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //        );
+
+
         // các đường dẫn không phải login
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers( "/login","login-success", "/logout", "/logoutSuccessful", "/403").permitAll().anyRequest().authenticated());
 //                .requestMatchers("/", "/login","login-success", "/logout", "/logoutSuccessful", "/403").permitAll());
         // cấp quyền cho student
+
 //        http.authorizeHttpRequests((authorize) -> authorize
 //                .requestMatchers("/create").hasRole("STUDENT"));
 //        // cấp quyền cho user và admin
@@ -64,6 +70,8 @@ public class WebSecurityConfig {
 //        //cấp quyền cho teacher
 //        http.authorizeHttpRequests((authorize) -> authorize
 //                .requestMatchers("/admin").hasRole("TEACHER"));
+
+
         // cấu hình form login
         http.formLogin(form -> form
                 .loginPage("/login")
@@ -91,3 +99,4 @@ public class WebSecurityConfig {
 
 
 }
+
