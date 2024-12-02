@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Course</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Course Details</h1>
+    <div id="courseDetails"></div>
+    <button id="backBtn">Back to List</button>
+    <button id="editBtn">Edit</button>
+
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            var courseId = /*[[${id}]]*/ '';
+
+            $.ajax({
+                url: '/api/courses/' + courseId,
+                type: 'GET',
+                success: function(course) {
+                    $('#courseDetails').html(
+                        '<p><strong>ID:</strong> ' + course.id + '</p>' +
+                        '<p><strong>Name:</strong> ' + course.name + '</p>' +
+                        '<p><strong>Duration:</strong> ' + course.duration + '</p>' +
+                        '<p><strong>Is Deleted:</strong> ' + course.isDelete + '</p>'
+                    );
+                },
+                error: function() {
+                    $('#courseDetails').html('<p>Course not found.</p>');
+                }
+            });
+
+            $('#backBtn').click(function() {
+                window.location.href = '/courses';
+            });
+
+            $('#editBtn').click(function() {
+                window.location.href = '/courses/edit/' + courseId;
+            });
+        });
+    </script>
+</body>
+</html>
