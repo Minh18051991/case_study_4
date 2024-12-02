@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Course List</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Course List</h1>
@@ -16,66 +15,18 @@
             </tr>
         </thead>
         <tbody>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.name}"></td>
+                <td th:text="${course.duration}"></td>
+                <td>
+                    <a th:href="@{/courses/{id}(id=${course.id})}">View</a>
+                    <a th:href="@{/courses/edit/{id}(id=${course.id})}">Edit</a>
+                    <a th:href="@{/api/courses/{id}(id=${course.id})}" onclick="return confirm('Are you sure you want to delete this course?');">Delete</a>
+                </td>
+            </tr>
         </tbody>
     </table>
-    <button id="createCourseBtn">Create New Course</button>
-
-    <script>
-        $(document).ready(function() {
-            loadCourses();
-
-            function loadCourses() {
-                $.ajax({
-                    url: '/api/courses',
-                    type: 'GET',
-                    success: function(courses) {
-                        var tbody = $('#courseTable tbody');
-                        tbody.empty();
-                        $.each(courses, function(i, course) {
-                            tbody.append(
-                                '<tr>' +
-                                '<td>' + course.id + '</td>' +
-                                '<td>' + course.name + '</td>' +
-                                '<td>' + course.duration + '</td>' +
-                                '<td>' +
-                                '<button class="viewBtn" data-id="' + course.id + '">View</button>' +
-                                '<button class="editBtn" data-id="' + course.id + '">Edit</button>' +
-                                '<button class="deleteBtn" data-id="' + course.id + '">Delete</button>' +
-                                '</td>' +
-                                '</tr>'
-                            );
-                        });
-                    }
-                });
-            }
-
-            $(document).on('click', '.viewBtn', function() {
-                var id = $(this).data('id');
-                window.location.href = '/courses/' + id;
-            });
-
-            $(document).on('click', '.editBtn', function() {
-                var id = $(this).data('id');
-                window.location.href = '/courses/edit/' + id;
-            });
-
-            $(document).on('click', '.deleteBtn', function() {
-                var id = $(this).data('id');
-                if (confirm('Are you sure you want to delete this course?')) {
-                    $.ajax({
-                        url: '/api/courses/' + id,
-                        type: 'DELETE',
-                        success: function() {
-                            loadCourses();
-                        }
-                    });
-                }
-            });
-
-            $('#createCourseBtn').click(function() {
-                window.location.href = '/courses/create';
-            });
-        });
-    </script>
+    <a href="/courses/create">Create New Course</a>
 </body>
 </html>
