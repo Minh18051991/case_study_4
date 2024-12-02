@@ -397,9 +397,9 @@ values ('Java OOP', 1, 1),
             ('C# Spring Security',4,31);
 -- them du lieu account
 insert into account (username, password)
-values ('admin', '123456'),
-       ('employee', '123456'),
-       ('student', '123456');
+values ('admin', '$2a$10$wKRMPSqhgrme1etVLMP1hOKxGaGIQR3KJYGeryuzznUGStlFWz04S'),
+       ('employee', '$2a$10$wKRMPSqhgrme1etVLMP1hOKxGaGIQR3KJYGeryuzznUGStlFWz04S'),
+       ('student', '$2a$10$wKRMPSqhgrme1etVLMP1hOKxGaGIQR3KJYGeryuzznUGStlFWz04S');
 insert into role (name)
 values ('ADMIN'),
        ('EMPLOYEE'),

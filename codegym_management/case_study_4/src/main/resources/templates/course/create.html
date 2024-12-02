@@ -1,11 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org lang="en">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Course</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <h1>Create New Course</h1>
+    <form id="createCourseForm">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="duration">Duration:</label>
+            <input type="text" id="duration" name="duration">
+        </div>
+        <button type="submit">Create Course</button>
+    </form>
+    <button id="backBtn">Back to List</button>
 
+    <script>
+        $(document).ready(function() {
+            $('#createCourseForm').submit(function(e) {
+                e.preventDefault();
+                var courseData = {
+                    name: $('#name').val(),
+                    duration: $('#duration').val()
+                };
+
+                $.ajax({
+                    url: '/api/courses',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(courseData),
+                    success: function(response) {
+                        alert('Course created successfully');
+                        window.location.href = '/courses';
+                    },
+                    error: function() {
+                        alert('Error creating course');
+                    }
+                });
+            });
+
+            $('#backBtn').click(function() {
+                window.location.href = '/courses';
+            });
+        });
+    </script>
 </body>
 </html>
