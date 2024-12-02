@@ -50,7 +50,7 @@ public class WebSecurityConfig {
         );
         // các đường dẫn không phải login
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/", "/login", "/logout", "/logoutSuccessful", "/403", "/login").permitAll());
+                .requestMatchers("/", "/login","login-success", "/logout", "/logoutSuccessful", "/403").permitAll());
         // cấp quyền cho student
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/create").hasRole("STUDENT"));
@@ -67,13 +67,17 @@ public class WebSecurityConfig {
         http.formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/process-login") // đường dẫn trùng với url form login
-                .defaultSuccessUrl("/userInfo")//
+                .defaultSuccessUrl("/login-success")//
                 .failureUrl("/login")
                 .usernameParameter("username")//trùng với tên trong form đăng nhập
                 .passwordParameter("password")// trung với tên trong form đăng nhập
         );
         // cấu hình logout
-        http.logout(form -> form.logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful"));
+        http.logout(form -> form
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true) // Xóa session
+                .deleteCookies("JSESSIONID")); // Xóa cookie phiên làm việc
 
         // cấu hình trả về trang 403 khi không có quyền (role) truy cập
         http.exceptionHandling(ex -> ex.accessDeniedPage("/403"));
