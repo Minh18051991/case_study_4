@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService implements IEmployeeService{
+public class EmployeeService implements IEmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final ClassesRepository classesRepository;
@@ -25,8 +25,9 @@ public class EmployeeService implements IEmployeeService{
     public List<Classes> getClassesByEmployee(Integer employeeId) {
         Optional<Employee> employeeOpt = employeeRepository.findById(employeeId);
         if (employeeOpt.isEmpty()) {
-            throw new IllegalArgumentException("Giảng viên không tồn tại với ID: " + employeeId);
+            return List.of();
         }
-        return classesRepository.findByEmployeeId(employeeId);
+        List<Classes> classes = classesRepository.findByEmployeeId(employeeId);
+        return classes != null ? classes : List.of();
     }
 }

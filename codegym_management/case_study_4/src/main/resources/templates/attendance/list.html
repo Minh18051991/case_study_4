@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Attendance List</title>
+</head>
+<body>
+
+<h1>Điểm danh lớp : <span th:text="${class.name}">Lớp</span> trong <span th:text="${attendanceDate}">ngày</span></h1>
+
+<form th:action="@{/employee/class/{classId}/attendance/create(classId=${class.id})}" method="post">
+    <input type="hidden" name="attendanceDate" th:value="${attendanceDate}">
+
+    <table>
+        <thead>
+        <tr>
+            <th>Tên Học Sinh</th>
+            <th>Trạng Thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.name}">Tên Học Sinh</td>
+            <td>
+                <input type="checkbox" name="presentStudents" th:value="${student.id}" /> <label>Present</label>
+
+                <select name="status[${student.id}]">
+                    <option value="CO_MAT">1</option>
+                    <option value="VANG_KHONG_PHEP">2</option>
+                    <option value="VANG_CO_PHEP">3</option>
+                    <option value="DI_MUON">4</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="submit">Cập nhật điểm danh</button>
+</form>
+
+</body>
+</html>

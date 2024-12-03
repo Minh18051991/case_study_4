@@ -5,7 +5,7 @@ import org.example.case_study_4.model.MyModule;
 import org.example.case_study_4.model.Lesson;
 import org.example.case_study_4.model.Activity;
 import org.example.case_study_4.repository.course.ICourseRepository;
-import org.example.case_study_4.repository.my_module.IMyModuleRepository;
+import org.example.case_study_4.repository.my_module.IModuleRepository;
 import org.example.case_study_4.repository.lesson.ILessonRepository;
 import org.example.case_study_4.repository.activity.IActivityRepository;
 import org.example.case_study_4.dto.CourseCreationDTO;
@@ -24,7 +24,7 @@ public class CourseService implements ICourseService {
     private ICourseRepository courseRepository;
 
     @Autowired
-    private IMyModuleRepository moduleRepository;
+    private IModuleRepository moduleRepository;
 
     @Autowired
     private ILessonRepository lessonRepository;
