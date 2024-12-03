@@ -1,4 +1,4 @@
-package org.example.case_study_4.my_module_dto;
+package org.example.case_study_4.dto.my_module_dto;
 
 public interface ResponseModuleDto {
     int getModuleId();

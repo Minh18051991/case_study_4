@@ -1,14 +1,14 @@
 package org.example.case_study_4.repository.my_module;
 
 import org.example.case_study_4.model.MyModule;
-import org.example.case_study_4.my_module_dto.ResponseModuleDto;
+import org.example.case_study_4.dto.my_module_dto.ResponseModuleDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface IModuleRepository extends JpaRepository<MyModule, Integer> {
+public interface IMyModuleRepository extends JpaRepository<MyModule, Integer> {
     @Query(value = "select m.id as moduleId, m.name as moduleName\n" +
             "from student s \n" +
             "join class c on s.class_id = c.id\n" +
