@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Score</title>
+  <th:block th:replace="~{/layout/layout::library}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{_header}"></th:block>
+
+<div class="container my-5">
+  <h1 class="text-center text-primary mb-4">Bảng Điểm Thi</h1>
+
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Module</th>
+      <th scope="col">Lý Thuyết</th>
+      <th scope="col">Thực Hành</th>
+      <th scope="col">Điểm Trung Bình</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="score, status : ${listScore}">
+      <td th:text="${status.count}"></td>
+      <td th:text="${score.moduleName}"></td>
+      <td th:text="${score.theory}"></td>
+      <td th:text="${score.practice}"></td>
+      <td th:text="${(score.theory + score.practice) / 2}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<th:block th:replace="~{_footer}"></th:block>
+</body>
+</html>
