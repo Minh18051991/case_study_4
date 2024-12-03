@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson</title>
+  <th:block th:replace="~{/layout/layout::library}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{_header}"></th:block>
+
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Danh Sách Các Bài Học</h1>
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên Bài Học</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="lesson, status:${listLesson}">
+      <td th:text="${status.count}"></td>
+      <td>
+        <a th:href="@{/progress/detail(id=${lesson.lessonId})}" class="btn btn-link">
+          <span th:text="${lesson.lessonName}"></span>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<th:block th:replace="~{_footer}"></th:block>
+</body>
+</html>

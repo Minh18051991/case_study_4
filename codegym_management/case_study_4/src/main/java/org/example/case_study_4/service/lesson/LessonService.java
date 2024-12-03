@@ -1,5 +1,6 @@
 package org.example.case_study_4.service.lesson;
 
+import org.example.case_study_4.dto.lessonDto.ResponseLessonDTO;
 import org.example.case_study_4.model.Lesson;
 import org.example.case_study_4.repository.lesson.ILessonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class LessonService implements ILessonService {
     private ILessonRepository lessonRepository;
 
     @Override
+    public List<ResponseLessonDTO> findLessonByStudentIdAndModuleId(Integer moduleId) {
+        return lessonRepository.findLessonByStudentIdAndModuleId(moduleId);
     public List<Lesson> findAll() {
         return lessonRepository.findAll();
     }
