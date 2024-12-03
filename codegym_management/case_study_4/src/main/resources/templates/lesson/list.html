@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lessons for Module</title>
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .activity-list {
+            display: none;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="_header :: header"></div>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Lessons for Module: <span th:text="${module.name}"></span></h1>
+    <a th:href="@{/lessons/create/{moduleId}(moduleId=${module.id})}" class="btn btn-primary mb-3">Create New Lesson</a>
+    <div class="list-group">
+        <div th:each="lesson : ${module.lessons}" class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 th:text="${lesson.name}" class="mb-1"></h5>
+                <button class="btn btn-link toggle-activities">Show Activities</button>
+            </div>
+            <div class="activity-list mt-2">
+                <div th:each="activity : ${lesson.activities}" class="mb-1">
+                    <span th:text="'[' + ${activity.category.name} + '] ' + ${activity.name}"></span>
+                </div>
+                <div th:if="${#lists.isEmpty(lesson.activities)}">No activities for this lesson.</div>
+            </div>
+        </div>
+    </div>
+    <a th:href="@{/courses/view/{id}(id=${module.id})}" class="btn btn-secondary mt-3">Back to Module</a>
+</div>
+
+<th:block th:replace="_footer :: footer"></th:block>
+
+<script>
+    $(document).ready(function() {
+        $('.toggle-activities').click(function() {
+            $(this).closest('.list-group-item').find('.activity-list').toggle();
+            $(this).text(function(i, text) {
+                return text === "Show Activities" ? "Hide Activities" : "Show Activities";
+            });
+        });
+    });
+</script>
+</body>
+</html>
