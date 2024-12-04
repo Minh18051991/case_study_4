@@ -18,6 +18,8 @@ public class LessonController {
 
     @Autowired
     private ILessonService lessonService;
+    @Autowired
+    private IMyModuleService myModuleService;
 
     @Autowired
     private IMyModuleService moduleService;

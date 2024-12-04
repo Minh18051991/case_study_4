@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public interface IMyModuleService {
     List<ResponseModuleDto> findModuleByStudentId(Integer studentId);
-
     void save(MyModule module);
 
     Optional<MyModule> findById(Integer moduleId);
