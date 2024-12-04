@@ -18,4 +18,9 @@ public class LessonService implements ILessonService {
         return lessonRepository.findLessonByStudentIdAndModuleId(moduleId);
     }
 
+    @Override
+    public Lesson findLessonByLessonId(Integer lessonId) {
+        return lessonRepository.findById(lessonId).orElse(null);
+    }
+
 }
