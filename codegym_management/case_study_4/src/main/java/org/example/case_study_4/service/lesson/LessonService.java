@@ -18,6 +18,8 @@ public class LessonService implements ILessonService {
     @Override
     public List<ResponseLessonDTO> findLessonByStudentIdAndModuleId(Integer moduleId) {
         return lessonRepository.findLessonByStudentIdAndModuleId(moduleId);
+    }
+
     public List<Lesson> findAll() {
         return lessonRepository.findAll();
     }

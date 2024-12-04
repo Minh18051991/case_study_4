@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/lessons")
@@ -25,6 +22,7 @@ public class LessonController {
     @Autowired
     private IMyModuleService moduleService;
 
+
     @GetMapping("/module/{moduleId}")
     public String viewModuleLessons(@PathVariable Integer moduleId, Model model) {
         MyModule module = moduleService.findById(moduleId)
@@ -33,12 +31,14 @@ public class LessonController {
         model.addAttribute("module", module);
         model.addAttribute("lessons", lessons);
         return "lesson/list";
+    }
+
     @GetMapping("/detail")
     public String listLesson(@RequestParam("id") int moduleId, Model model) {
         model.addAttribute("listLesson", lessonService.findLessonByStudentIdAndModuleId(moduleId));
         return "lesson/detail";
     }
-}
+
 
     @GetMapping("/create/{moduleId}")
     public String createLessonForm(@PathVariable Integer moduleId, Model model) {
