@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Module</title>
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+</head>
+<body>
+<div th:insert="_header :: header"></div>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Create New Module</h1>
+    <form th:action="@{/modules/create/{courseId}(courseId=${courseId})}" th:object="${module}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Module Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Module</button>
+        <a th:href="@{/modules/course/{courseId}(courseId=${courseId})}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<th:block th:replace="_footer :: footer"></th:block>
+</body>
+</html>
