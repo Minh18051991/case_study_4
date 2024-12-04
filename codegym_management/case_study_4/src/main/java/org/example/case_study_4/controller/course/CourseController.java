@@ -2,84 +2,80 @@ package org.example.case_study_4.controller.course;
 
 import org.example.case_study_4.model.Course;
 import org.example.case_study_4.model.MyModule;
-import org.example.case_study_4.model.Lesson;
-import org.example.case_study_4.model.Activity;
 import org.example.case_study_4.service.course.ICourseService;
-import org.example.case_study_4.dto.CourseCreationDTO;
+import org.example.case_study_4.service.my_module.IMyModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/courses")
-@CrossOrigin
+@Controller
+@RequestMapping("/courses")
 public class CourseController {
-
     @Autowired
     private ICourseService courseService;
 
+    @Autowired
+    private IMyModuleService moduleService;
+
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourses() {
-        return ResponseEntity.ok(courseService.findAll());
+    public String listCourses(Model model) {
+        List<Course> courses = courseService.findAllActive();
+        model.addAttribute("courses", courses);
+        return "course/list";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Course> getCourseById(@PathVariable Integer id) {
-        return courseService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/create")
+    public String createCourseForm(Model model) {
+        model.addAttribute("course", new Course());
+        return "course/create";
     }
 
-    @PostMapping
-    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
-        return ResponseEntity.ok(courseService.save(course));
+    @PostMapping("/create")
+    public String createCourse(@ModelAttribute Course course, RedirectAttributes redirectAttributes) {
+        course.setIsDelete(false);
+        courseService.save(course);
+        redirectAttributes.addFlashAttribute("message", "Course created successfully");
+        return "redirect:/courses";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Course> updateCourse(@PathVariable Integer id, @RequestBody Course course) {
-        return ResponseEntity.ok(courseService.updateCourse(id, course));
+    @GetMapping("/edit/{id}")
+    public String editCourseForm(@PathVariable Integer id, Model model) {
+        Course course = courseService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid course Id:" + id));
+        model.addAttribute("course", course);
+        return "course/edit";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCourse(@PathVariable Integer id) {
-        courseService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/edit/{id}")
+    public String editCourse(@PathVariable Integer id, @ModelAttribute Course course, RedirectAttributes redirectAttributes) {
+        course.setId(id);
+        courseService.save(course);
+        redirectAttributes.addFlashAttribute("message", "Course updated successfully");
+        return "redirect:/courses";
     }
 
-    @PostMapping("/full")
-    public ResponseEntity<Course> createFullCourse(@RequestBody CourseCreationDTO courseCreationDTO) {
-        return ResponseEntity.ok(courseService.createFullCourse(courseCreationDTO));
+    @GetMapping("/view/{id}")
+    public String viewCourse(@PathVariable Integer id, Model model) {
+        Optional<Course> course = courseService.findById(id);
+        if (course.isPresent()) {
+            model.addAttribute("course", course.get());
+            List<MyModule> modules = moduleService.findActiveByCourseId(id);
+            model.addAttribute("modules", modules);
+            return "course/view";
+        } else {
+            return "redirect:/courses";
+        }
     }
 
-    @PostMapping("/{courseId}/modules")
-    public ResponseEntity<MyModule> addModuleToCourse(@PathVariable Integer courseId, @RequestBody MyModule module) {
-        return ResponseEntity.ok(courseService.addModuleToCourse(courseId, module));
-    }
-
-    @PostMapping("/modules/{moduleId}/lessons")
-    public ResponseEntity<Lesson> addLessonToModule(@PathVariable Integer moduleId, @RequestBody Lesson lesson) {
-        return ResponseEntity.ok(courseService.addLessonToModule(moduleId, lesson));
-    }
-
-    @PostMapping("/lessons/{lessonId}/activities")
-    public ResponseEntity<Activity> addActivityToLesson(@PathVariable Integer lessonId, @RequestBody Activity activity) {
-        return ResponseEntity.ok(courseService.addActivityToLesson(lessonId, activity));
-    }
-
-    @PutMapping("/modules/{moduleId}")
-    public ResponseEntity<MyModule> updateModule(@PathVariable Integer moduleId, @RequestBody MyModule module) {
-        return ResponseEntity.ok(courseService.updateModule(moduleId, module));
-    }
-
-    @PutMapping("/lessons/{lessonId}")
-    public ResponseEntity<Lesson> updateLesson(@PathVariable Integer lessonId, @RequestBody Lesson lesson) {
-        return ResponseEntity.ok(courseService.updateLesson(lessonId, lesson));
-    }
-
-    @PutMapping("/activities/{activityId}")
-    public ResponseEntity<Activity> updateActivity(@PathVariable Integer activityId, @RequestBody Activity activity) {
-        return ResponseEntity.ok(courseService.updateActivity(activityId, activity));
+    @GetMapping("/delete/{id}")
+    public String softDeleteCourse(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        courseService.softDelete(id);
+        redirectAttributes.addFlashAttribute("message", "Course deleted successfully");
+        return "redirect:/courses";
     }
 }
