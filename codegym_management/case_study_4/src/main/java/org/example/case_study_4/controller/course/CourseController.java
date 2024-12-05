@@ -59,7 +59,7 @@ public class CourseController {
         return "redirect:/courses";
     }
 
-    @GetMapping("/view/{id}")
+    @GetMapping("/modules/{id}")
     public String viewCourse(@PathVariable Integer id, Model model) {
         Optional<Course> course = courseService.findById(id);
         if (course.isPresent()) {
