@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface IActivityRepository extends JpaRepository<Activity, Integer> {
     List<Activity> findByLessonId(Integer lessonId);
-
     List<Activity> findByLessonIdAndIsDeleteFalse(Integer lessonId);
+    List<Activity> findByLessonIdAndIsDeleteTrue(Integer lessonId);
+
 
 }

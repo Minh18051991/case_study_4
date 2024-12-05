@@ -14,10 +14,7 @@ public class ActivityService implements IActivityService {
     @Autowired
     private IActivityRepository activityRepository;
 
-    @Override
-    public List<Activity> findAll() {
-        return activityRepository.findAll();
-    }
+
 
     @Override
     public Optional<Activity> findById(Integer id) {
@@ -29,10 +26,7 @@ public class ActivityService implements IActivityService {
         return activityRepository.save(activity);
     }
 
-    @Override
-    public void deleteById(Integer id) {
-        activityRepository.deleteById(id);
-    }
+
 
     @Override
     public List<Activity> findByLessonId(Integer lessonId) {

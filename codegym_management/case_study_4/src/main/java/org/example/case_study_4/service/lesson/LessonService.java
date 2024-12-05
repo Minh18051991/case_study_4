@@ -20,6 +20,13 @@ public class LessonService implements ILessonService {
         return lessonRepository.findLessonByStudentIdAndModuleId(moduleId);
     }
 
+
+    @Override
+    public Lesson findLessonByLessonId(Integer lessonId) {
+        return lessonRepository.findById(lessonId).orElse(null);
+    }
+    
+    @Override
     public List<Lesson> findAll() {
         return lessonRepository.findAll();
     }
@@ -43,4 +50,5 @@ public class LessonService implements ILessonService {
     public List<Lesson> findByModuleId(Integer moduleId) {
         return lessonRepository.findByModuleId(moduleId);
     }
+
 }

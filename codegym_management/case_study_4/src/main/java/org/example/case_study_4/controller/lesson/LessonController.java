@@ -2,6 +2,7 @@ package org.example.case_study_4.controller.lesson;
 
 import org.example.case_study_4.model.Lesson;
 import org.example.case_study_4.model.MyModule;
+import org.example.case_study_4.service.category_activity.CategoryActivityService;
 import org.example.case_study_4.service.lesson.ILessonService;
 import org.example.case_study_4.service.my_module.IMyModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,13 @@ public class LessonController {
 
     @Autowired
     private ILessonService lessonService;
+    @Autowired
+    private IMyModuleService myModuleService;
 
     @Autowired
     private IMyModuleService moduleService;
+    @Autowired
+    private CategoryActivityService categoryActivityService;
 
 
     @GetMapping("/module/{moduleId}")

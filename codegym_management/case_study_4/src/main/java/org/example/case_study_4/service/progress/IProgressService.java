@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface IProgressService {
     List<ProgressDTO> findAllByLessonIdAndStudentId(int studentId, int lessonId);
+
     void saveProgress(Progress progress);
-    Progress findByIdAndActivityIdAndStudentId(int id, int activityId, int studentId);
+
+    Progress findById(int id);
+
+    Progress findByActivityIdAndStudentId(Integer activityId, Integer studentId);
 }
