@@ -1,16 +1,14 @@
-package org.example.case_study_4.model;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
-
 @Entity
-@Table(name = "student")
+@Table(name = "employee")
 @Getter
 @Setter
-public class Student {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,6 +21,7 @@ public class Student {
 
     private Boolean gender;
 
+    @Column()
     private String address;
 
     private String phone;
@@ -33,13 +32,15 @@ public class Student {
     @Column(name = "birth_date")
     private String dateOfBirth;
 
+    @Column(name = "salary")
+    private Double salary;
 
     @Column(name = "is_delete")
     private Boolean isDelete = false;
 
     @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Classes classEntity;
+    @JoinColumn(name = "position_id")
+    private EmployeePosition position;
 
     @OneToOne
     @JoinColumn(name = "account_id")

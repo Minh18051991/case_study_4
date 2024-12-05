@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="mt-5">Attendance Management</h1>
+
+  <!DOCTYPE html>
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách điểm danh cho lớp: <span th:text="${class.name}">Tên lớp</span></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+  <body>
+  <div class="container mt-4">
+    <!-- Tiêu đề hiển thị tên lớp và ngày điểm danh -->
+    <h2>Điểm danh cho lớp: <span th:text="${class.name}">Tên lớp</span></h2>
+    <h3>Ngày điểm danh: <span th:text="${attendanceDate}">Ngày</span></h3>
+
+    <!-- Bảng danh sách điểm danh -->
+    <h4>Danh sách điểm danh</h4>
+    <table class="table table-striped">
+      <thead class="thead-light">
+      <tr>
+        <th>Tên sinh viên</th>
+        <th>Trạng thái</th>
+        <th>Ngày điểm danh</th>
+        <th>Ghi chú</th>
+        <th>Thao tác</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Lặp qua danh sách điểm danh -->
+      <tr th:each="attendance : ${attendanceList}">
+        <!-- Hiển thị tên sinh viên -->
+        <td th:text="${attendance.student.name}">Tên sinh viên</td>
+
+        <!-- Hiển thị trạng thái điểm danh -->
+        <td th:text="${attendance.status}">Trạng thái</td>
+
+        <!-- Hiển thị ngày điểm danh -->
+        <td th:text="${attendance.createAt}">Ngày điểm danh</td>
+
+        <!-- Cập nhật ghi chú điểm danh -->
+        <td>
+          <form th:action="@{/employee/class/{classId}/attendance/updateNote/{attendanceId}(classId=${class.id}, attendanceId=${attendance.id})}" method="post" class="d-inline">
+            <input type="text" name="note" class="form-control form-control-sm" th:value="${attendance.note}" placeholder="Thêm ghi chú">
+            <button type="submit" class="btn btn-sm btn-primary mt-1">Cập nhật ghi chú</button>
+          </form>
+        </td>
+
+        <td>
+          <!-- Cập nhật trạng thái điểm danh -->
+          <form th:action="@{/employee/class/{classId}/attendance/update/{attendanceId}(classId=${class.id}, attendanceId=${attendance.id})}" method="post" class="d-inline">
+            <input type="hidden" name="attendanceDate" th:value="${attendance.createAt}">
+            <select name="status" class="form-control-sm">
+              <option th:value="CO_MAT" th:selected="${attendance.status == 'CO_MAT'}">Có mặt</option>
+              <option th:value="VANG_KHONG_PHEP" th:selected="${attendance.status == 'VANG_KHONG_PHEP'}">Vắng (Không phép)</option>
+              <option th:value="VANG_CO_PHEP" th:selected="${attendance.status == 'VANG_CO_PHEP'}">Vắng (Có phép)</option>
+              <option th:value="DI_MUON" th:selected="${attendance.status == 'DI_MUON'}">Đi muộn</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-warning mt-1">Cập nhật trạng thái</button>
+          </form>
+
+          <!-- Xóa điểm danh -->
+          <form th:action="@{/employee/class/{classId}/attendance/delete/{attendanceId}(classId=${class.id}, attendanceId=${attendance.id})}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-danger mt-1">Xóa điểm danh</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <a th:href="@{/employee/class/{classId}/attendance/create(classId=${class.id})}" class="btn btn-primary">Tạo điểm danh</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+  </html>
+
+
+  <!-- Form xem điểm danh theo ngày -->
+  <h2 class="mt-4">View Attendance by Date</h2>
+  <form th:action="@{/attendance/getAttendanceByDate}" method="get">
+    <div class="mb-3">
+      <label for="start" class="form-label">Start Date</label>
+      <input type="datetime-local" id="start" name="start" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="end" class="form-label">End Date</label>
+      <input type="datetime-local" id="end" name="end" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Get Attendance</button>
+  </form>
+
+  <!-- Danh sách điểm danh theo ngày -->
+  <div th:if="${attendances != null}">
+    <h3 class="mt-4">Attendance List</h3>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Class ID</th>
+        <th>Status</th>
+        <th>Note</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="attendance : ${attendances}">
+        <td th:text="${attendance.student.id}"></td>
+        <td th:text="${attendance.classEntity.id}"></td>
+        <td th:text="${attendance.status}"></td>
+        <td th:text="${attendance.note}"></td>
+        <td>
+          <form th:action="@{/attendance/updateAttendance/{attendanceId}(attendanceId=${attendance.id})}" method="post">
+            <button type="submit" class="btn btn-warning btn-sm">Update</button>
+          </form>
+          <form th:action="@{/attendance/deleteAttendance/{attendanceId}(attendanceId=${attendance.id})}" method="post">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
