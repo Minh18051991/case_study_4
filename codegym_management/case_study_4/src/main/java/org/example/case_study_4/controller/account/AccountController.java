@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+// imporrt các lớp để lấy quyền account
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.security.Principal;
 
 @Controller
@@ -51,16 +56,25 @@ public class AccountController {
 
     @Transactional
     @PostMapping("/update-password")
-    public String updatePassword(Principal principal, @RequestParam String newPassword) {
+    public String updatePassword(Principal principal, @RequestParam String newPassword,Model model) {
         String username = principal.getName();
-
         accountService.updateAccount(username, newPassword);
+
+        // Lấy quyền của người đăng nhập hiện tại
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse("ROLE_USER");
+
+
+        model.addAttribute("userRole", role);
 
         // Xóa OTP sau khi sử dụng
         otpRepository.deleteByUsername(username);
 
 
-        return "layout/layout";
+        return "account/updatePassword";
     }
 
 
