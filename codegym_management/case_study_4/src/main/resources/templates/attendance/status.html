@@ -4,12 +4,69 @@
     <meta charset="UTF-8">
     <title>Attendance Status Count</title>
     <th:block th:replace="~{/layout/layout::library}"></th:block>
+
+    <style>
+        .table-responsive {
+            margin-top: 30px;
+        }
+
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        th, td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
+            transition: all 0.2s ease;
+        }
+
+        .table {
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table td, .table th {
+            padding: 20px;
+        }
+
+        .table th {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .table td {
+            font-size: 1rem;
+            color: #495057;
+        }
+
+        .table th:hover {
+            background-color: #0056b3;
+            cursor: pointer;
+        }
+
+        /* Thêm hiệu ứng cho hover vào tiêu đề */
+        thead th:hover {
+            background-color: #0056b3;
+            cursor: pointer;
+        }
+    </style>
+
 </head>
 <body>
 <th:block th:replace="~{_header}"></th:block>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Điểm danh</h1>
+    <h1 class="text-center text-primary mb-4">Điểm danh</h1>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="table-primary">
@@ -31,7 +88,6 @@
         </table>
     </div>
 </div>
-
 
 <th:block th:replace="~{_footer}"></th:block>
 </body>

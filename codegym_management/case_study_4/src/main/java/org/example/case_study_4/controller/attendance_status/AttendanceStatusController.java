@@ -1,8 +1,10 @@
 package org.example.case_study_4.controller.attendance_status;
 
 import org.example.case_study_4.dto.attendanceStatusDto.AttendanceStatusCount;
+import org.example.case_study_4.model.Account;
 import org.example.case_study_4.model.Attendance;
 import org.example.case_study_4.model.Student;
+import org.example.case_study_4.service.account.IAccountSer;
 import org.example.case_study_4.service.attendance_status.IAttendanceStatusService;
 import org.example.case_study_4.service.studentL.IStudentSer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -20,12 +23,17 @@ public class AttendanceStatusController {
     private IAttendanceStatusService attendanceStatusService;
     @Autowired
     private IStudentSer studentSer;
+    @Autowired
+    private IAccountSer accountSer;
 
     @GetMapping("/status")
-    public String attendanceStatus(Model model) {
-        Integer studentId = 1;
+    public String attendanceStatus(Model model, Principal principal) {
+        String username = principal.getName();
 
-        Student student = studentSer.findById(studentId);
+        Account account = accountSer.getAccount(username);
+        Student student = studentSer.findByAccount(account);
+
+        Integer studentId = student.getId();
 
         List<Attendance> attendanceList = attendanceStatusService.findByStudentIdAndIsDeleteFalse(studentId);
         model.addAttribute("attendanceList", attendanceList);

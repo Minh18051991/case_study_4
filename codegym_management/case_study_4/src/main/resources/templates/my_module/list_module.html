@@ -5,57 +5,89 @@
     <title>Title</title>
     <th:block th:replace="~{/layout/layout::library}"></th:block>
     <style>
-        /* Tùy chỉnh thêm nếu cần */
+
         .card {
-            transition: transform 0.2s ease-in-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease-in-out;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
 
         .card-body {
             padding: 20px;
+            background-color: #f8f9fa;
         }
 
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: bold;
+            color: #343a40;
         }
 
         .card-text {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #6c757d;
         }
 
         .btn {
-            margin-top: 15px;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .container {
+            padding-top: 50px;
+        }
+
+        .row {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .col-md-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
+
 <body>
 <th:block th:replace="~{_header}"></th:block>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Danh sách Module Khoá Học</h1>
+    <h1 class="text-center mb-4 text-dark">Danh sách Module Khoá Học</h1>
 
     <div class="row">
-        <!-- Lặp qua listModule và hiển thị card cho mỗi module -->
+
         <div class="col-md-4 mb-4" th:each="md, status : ${listModule}">
             <div class="card shadow-sm">
                 <img class="card-img-top" src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/452972620_814500180828394_6357377530575291499_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=JQclPaTVVwoQ7kNvgFW6IJS&_nc_zt=23&_nc_ht=scontent.fsgn2-7.fna&_nc_gid=Alfwj7uI-u2I9VidfpH7bYJ&oh=00_AYDiGEs-NxK_teVZ8aDRfufuBgHVlrWkYy1IWNeNAI3QWQ&oe=67534B15" alt="Card image cap"> <!-- Thêm ảnh đại diện -->
                 <div class="card-body">
                     <h5 class="card-title" th:text="${md.moduleName}"></h5>
-                    <p class="card-text">Code Gym hệ thống đào tạo lập trình với các khóa học nâng cao.</p>
+                    <p class="card-text">Code Gym hệ thống đào tạo lập trình với các khóa học nâng cao, giúp bạn cải thiện kỹ năng lập trình nhanh chóng và hiệu quả.</p>
                     <a th:href="@{/lesson/detail(id=${md.getModuleId()})}" class="btn btn-primary btn-block">Chi tiết</a>
                 </div>
             </div>
         </div>
-        <!-- End Loop -->
+
     </div>
 </div>
-
-
 
 <th:block th:replace="~{_footer}"></th:block>
 </body>
