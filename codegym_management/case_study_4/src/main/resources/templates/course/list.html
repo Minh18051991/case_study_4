@@ -10,16 +10,19 @@
 
 <div class="container mt-5">
     <h1 class="mb-4">Courses</h1>
-    <a href="/courses/create" class="btn btn-primary mb-3">Create New Course</a>
+    <div class="d-flex justify-content-center mt-3">
+    <a href="/courses/create" class="btn btn-primary">Create New Course</a>
+    </div>
     <div class="row">
         <div th:each="course : ${courses}" class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${course.name}"></h5>
                     <p class="card-text" th:text="${'Duration: ' + course.duration}"></p>
-                    <a th:href="@{/courses/view/{id}(id=${course.id})}" class="btn btn-info">View</a>
-                    <a th:href="@{/courses/edit/{id}(id=${course.id})}" class="btn btn-warning">Edit</a>
-                    <a th:href="@{/courses/delete/{id}(id=${course.id})}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a th:href="@{/courses/view/{id}(id=${course.id})}" class="btn btn-primary mb-3">View</a>
+                    <a th:href="@{/courses/edit/{id}(id=${course.id})}" class="btn btn-primary mb-3">Edit</a>
+                    <a th:href="@{/courses/delete/{id}(id=${course.id})}" class="btn btn-primary mb-3"
+                       onclick="return confirm('Are you sure?')">Delete</a>
                 </div>
             </div>
         </div>

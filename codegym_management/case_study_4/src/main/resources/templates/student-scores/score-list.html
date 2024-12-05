@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bảng điểm học sinh</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+</head>
+<body>
+<div th:insert="_header :: header"></div>
+    <div class="container mt-5">
+        <h2>Bảng điểm của <span th:text="${student.name}"></span></h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Điểm lý thuyết</th>
+                    <th>Điểm thực hành</th>
+                    <th>Điểm trung bình</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="score : ${scores}">
+                    <td th:text="${score.module.name}"></td>
+                    <td th:text="${score.theory}"></td>
+                    <td th:text="${score.practice}"></td>
+                    <td th:text="${(score.theory + score.practice) / 2}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center mt-3">
+            <a href="javascript:history.back()" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </div>
+    <th:block th:replace="_footer :: footer"></th:block>
+</body>
+</html>
