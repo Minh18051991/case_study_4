@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Arial', sans-serif;
+        }
+        .content {
+            flex: 1 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #2980b9, #8e44ad);
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+        .login-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-login:hover {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="_header :: header"></div>
+
+<div class="content">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form name='f' th:action="@{/process-login}" method='POST'>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type='text' id="username" name='username' required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type='password' id="password" name='password' required>
+            </div>
+            <button type="submit" class="btn-login">Login</button>
+        </form>
+    </div>
+</div>
+
+<th:block th:replace="_footer :: footer"></th:block>
+
+
+</body>
+</html>

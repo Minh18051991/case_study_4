@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
+
+</head>
+<body>
+<th:block th:replace="~{_header}"></th:block>
+
+<div class="container my-5">
+
+    <h2 class="text-center mb-4" th:text="'Bài học: ' + ${lesson.name}"></h2>
+
+    <table class="table table-striped table-hover shadow-sm rounded border">
+        <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Tên Hoạt Động</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="progress, status : ${progressList}">
+            <td th:text="${status.count}" class="align-middle"></td>
+            <td th:text="${progress.getActivityName()}" class="align-middle"></td>
+            <td class="align-middle">
+                <input type="checkbox" class="progress-checkbox"
+                       th:checked="${progress.getProgressStatus() != null ? progress.getProgressStatus() : false}"
+                       th:data-activity-id="${progress.getActivityId()}"
+                       onchange="updateStatus(this)" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<th:block th:replace="~{_footer}"></th:block>
+
+<script>
+    function updateStatus(checkbox) {
+
+        var data = {
+            activityId: $(checkbox).data('activity-id'),
+            status: checkbox.checked
+        };
+
+        console.log(data);
+
+
+        $.ajax({
+            url: 'http://localhost:8080/api/progress/updateStatus',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function(response) {
+                console.log('Cập nhật thành công!', response);
+            },
+            error: function(xhr, status, error) {
+                console.log('Có lỗi xảy ra:', error);
+            }
+        });
+    }
+
+</script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</body>
+</html>

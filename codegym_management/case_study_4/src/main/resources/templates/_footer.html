@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<th:block th:fragment="footer">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height:100vh ;
+    }
+    .content {
+      flex: 1 0 auto;
+    }
+    .footer {
+      flex-shrink: 0;
+      background-color: #343a40;
+      color: #ffffff;
+      padding: 20px 0;
+      font-size: 14px;
+      margin-top: auto;
+    }
+    .footer h5 {
+      color: #ffffff;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .footer-links {
+      list-style: none;
+      padding-left: 0;
+    }
+    .footer-links li {
+      margin-bottom: 5px;
+    }
+    .footer-links a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: #007bff;
+    }
+    .social-icons {
+      font-size: 20px;
+    }
+    .social-icons a {
+      color: #ffffff;
+      margin-right: 10px;
+    }
+    .social-icons a:hover {
+      color: #007bff;
+    }
+    .copyright {
+      margin-top: 10px;
+      border-top: 1px solid #4a4a4a;
+      padding-top: 10px;
+      text-align: center;
+    }
+  </style>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Về chúng tôi</h5>
+          <p>C0724I1 là group vip pro , chuyên thiết kế web  </p>
+        </div>
+        <div class="col-md-4">
+          <h5>Liên kết nhanh</h5>
+          <ul class="footer-links">
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="#">Các khóa học</a></li>
+            <li><a href="#">Tuyển sinh</a></li>
+            <li><a href="#">Liên hệ</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Liên hệ</h5>
+          <p>
+            295 Đường Nguyễn Tất Thành, Quận Thanh Khê<br>
+            Đà Nẵng, Việt Nam<br>
+            <strong>Phone:</strong> +84 123 456 789<br>
+            <strong>Email:</strong> hungnguuen988@gmail.com
+          </p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2024 C0724I1 MÃI ĐỈNH</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and Font Awesome -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
+</th:block>
+</body>
+</html>
