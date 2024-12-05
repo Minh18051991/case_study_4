@@ -29,27 +29,29 @@ public class EmployeeViewController {
         this.dailyNoteService = dailyNoteService;
     }
 
-    @GetMapping("/{employeeId}")
-    public String getClassesByEmployee(@PathVariable String employeeId, Model model) {
-        Integer empId;
-        try {
-            empId = Integer.valueOf(employeeId);
-        } catch (NumberFormatException e) {
-            model.addAttribute("message", "Giá trị ID giảng viên không hợp lệ.");
-            return "employee/employee";
-        }
-        var classes = employeeService.getClassesByEmployee(empId);
+
+    @GetMapping("/employee")
+    public String getClassesByEmployee(@RequestParam Integer employeeId, Model model) {
+        // Gọi service để lấy danh sách lớp học của giảng viên
+        var classes = employeeService.getClassesByEmployee(employeeId);
+
+        // Nếu không tìm thấy lớp học cho giảng viên, hiển thị thông báo lỗi
         if (classes.isEmpty()) {
             model.addAttribute("message", "Không tìm thấy lớp học cho giảng viên này.");
-            return "employee/employee";
+            return "employee/employee"; // Trả về trang employee với thông báo lỗi
         }
+
+        // Nếu có lớp học, hiển thị danh sách lớp học
         model.addAttribute("classes", classes);
-        model.addAttribute("employeeId", empId);
+        model.addAttribute("employeeId", employeeId); // Đưa employeeId vào model để sử dụng trong view
+
+        // Trả về trang employee với danh sách lớp học
         return "employee/employee";
     }
 
-    @GetMapping("/class/{classId}/diary")
-    public String getDiary(@PathVariable Integer classId, Model model) {
+
+    @GetMapping("/class/diary")
+    public String getDiary(@RequestParam Integer classId, Model model) {
         Optional<Classes> currentClass = Optional.ofNullable(classService.getClassById(classId));
         if (!currentClass.isPresent()) {
             model.addAttribute("message", "Lớp học không tồn tại.");
@@ -61,8 +63,8 @@ public class EmployeeViewController {
         return "employee/diary";
     }
 
-    @PostMapping("/class/{classId}/diary")
-    public String updateDiary(@PathVariable Integer classId, @RequestParam String content, Model model) {
+    @PostMapping("/class/diary")
+    public String updateDiary(@RequestParam Integer classId, @RequestParam String content, Model model) {
         Optional<Classes> currentClass = Optional.ofNullable(classService.getClassById(classId));
         if (!currentClass.isPresent()) {
             model.addAttribute("message", "Lớp học không tồn tại.");
@@ -81,8 +83,8 @@ public class EmployeeViewController {
         return "employee/diary";
     }
 
-    @GetMapping("/class/{classId}/diary/create")
-    public String createDiaryForm(@PathVariable Integer classId, Model model) {
+    @GetMapping("/class/diary/create")
+    public String createDiaryForm(@RequestParam Integer classId, Model model) {
         Optional<Classes> currentClass = Optional.ofNullable(classService.getClassById(classId));
         if (!currentClass.isPresent()) {
             model.addAttribute("message", "Lớp học không tồn tại.");
@@ -92,8 +94,8 @@ public class EmployeeViewController {
         return "employee/create-diary";
     }
 
-    @PostMapping("/class/{classId}/diary/create")
-    public String createDiary(@PathVariable Integer classId, @RequestParam String content, Model model) {
+    @PostMapping("/class/diary/create")
+    public String createDiary(@RequestParam Integer classId, @RequestParam String content, Model model) {
         Optional<Classes> currentClass = Optional.ofNullable(classService.getClassById(classId));
 
         if (!currentClass.isPresent()) {
@@ -113,8 +115,8 @@ public class EmployeeViewController {
         return "employee/diary";
     }
 
-    @GetMapping("/class/{classId}/diary/edit/{noteId}")
-    public String editDiaryForm(@PathVariable Integer classId, @PathVariable Integer noteId, Model model) {
+    @GetMapping("/class/diary/edit")
+    public String editDiaryForm(@RequestParam Integer classId, @RequestParam Integer noteId, Model model) {
         Optional<Classes> currentClass = Optional.ofNullable(classService.getClassById(classId));
         if (!currentClass.isPresent()) {
             model.addAttribute("message", "Lớp học không tồn tại.");
@@ -130,9 +132,8 @@ public class EmployeeViewController {
         return "employee/edit-diary";
     }
 
-
-    @PostMapping("/class/{classId}/diary/edit/{noteId}")
-    public String updateDiary(@PathVariable Integer classId, @PathVariable Integer noteId, @RequestParam String content, Model model) {
+    @PostMapping("/class/diary/edit")
+    public String updateDiary(@RequestParam Integer classId, @RequestParam Integer noteId, @RequestParam String content, Model model) {
         Optional<Classes> currentClass = Optional.ofNullable(classService.getClassById(classId));
         if (!currentClass.isPresent()) {
             model.addAttribute("message", "Lớp học không tồn tại.");
@@ -154,10 +155,9 @@ public class EmployeeViewController {
         return "employee/diary";
     }
 
-
     // New method to delete a DailyNote
-    @GetMapping("/class/{classId}/diary/delete/{noteId}")
-    public String deleteDiary(@PathVariable Integer classId, @PathVariable Integer noteId, Model model) {
+    @GetMapping("/class/diary/delete")
+    public String deleteDiary(@RequestParam Integer classId, @RequestParam Integer noteId, Model model) {
         Optional<Classes> currentClass = Optional.ofNullable(classService.getClassById(classId));
         if (!currentClass.isPresent()) {
             model.addAttribute("message", "Lớp học không tồn tại.");
@@ -173,9 +173,6 @@ public class EmployeeViewController {
         model.addAttribute("class", currentClass.get());
         model.addAttribute("dailyNotes", dailyNotes);
         model.addAttribute("message", "Nhật ký lớp học đã được xóa.");
-
         return "employee/diary";
     }
-
-
 }

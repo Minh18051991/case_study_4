@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,20 +25,28 @@ public class StudentController {
         this.classesService = classesService;
     }
 
-    @GetMapping("class/{classId}/employee/{employeeId}")
-    public String viewStudents(@PathVariable Integer classId, @PathVariable Integer employeeId, Model model) {
+    // Thay đổi đường dẫn sử dụng @RequestParam thay vì @PathVariable
+    @GetMapping("/class")
+    public String viewStudents(@RequestParam Integer classId, @RequestParam Integer employeeId, Model model) {
+        // Kiểm tra xem giảng viên có phụ trách lớp học này không
         if (!classesService.isTeacherAssignedToClass(employeeId, classId)) {
             model.addAttribute("message", "Giảng viên không phụ trách lớp học này.");
-            return "student/error";
+            return "student/error"; // Trả về trang lỗi nếu giảng viên không phụ trách lớp
         }
+
+        // Lấy danh sách học viên trong lớp
         List<Student> students = studentService.getStudentsByClassId(classId);
         if (students == null || students.isEmpty()) {
             model.addAttribute("message", "Không có học viên nào trong lớp học này.");
-            return "student/error";
+            return "student/error"; // Trả về trang lỗi nếu không có học viên
         }
+
+        // Thêm dữ liệu vào model để hiển thị trong view
         model.addAttribute("students", students);
         model.addAttribute("classId", classId);
         model.addAttribute("employeeId", employeeId);
+
+        // Trả về trang hiển thị danh sách học viên
         return "student/list";
     }
 }

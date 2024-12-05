@@ -1,25 +1,38 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cập nhật điểm danh</title>
 </head>
 <body>
-<h1>Cập nhật điểm danh</h1>
-<form action="/employee/class/attendance/update" method="POST" th:object="${attendance}">
-    <input type="text" name="classId" th:value="${classId}">
-    <input type="number" th:field="*{id}">
-    <input type="text" th:field="*{createAt}">
-    <input type="number" th:field="*{student.id}">
-    <input type="number" th:field="*{classEntity.id}">
-    <label for="status">Trạng thái:</label>
-    <input type="text" id="status" name="status" th:field="*{status}"><br>
-    <label for="note">Ghi chú:</label>
-    <textarea id="note" name="note" th:field="*{note}"></textarea><br>
-    <button type="submit">Cập nhật</button>
+<h1>Cập nhật điểm danh cho sinh viên: <span th:text="${attendance.student.name}">Tên Sinh viên</span></h1>
+
+<form th:action="@{/employee/class/update(classId=${classId}, attendanceId=${attendance.id})}" method="post">
+    <div>
+        <label for="status">Trạng thái:</label>
+        <select id="status" name="status">
+            <option value="VANG_KHONG_PHEP" th:selected="${attendance.status == 'VANG_KHONG_PHEP'}">Vắng không phép</option>
+            <option value="VANG_CO_PHEP" th:selected="${attendance.status == 'VANG_CO_PHEP'}">Vắng có phép</option>
+            <option value="CO_MAT" th:selected="${attendance.status == 'CO_MAT'}">Có mặt</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="note">Ghi chú:</label>
+        <textarea id="note" name="note" th:text="${attendance.note}"></textarea>
+    </div>
+
+    <div>
+        <button type="submit">Cập nhật</button>
+    </div>
 </form>
 
-<a th:href="@{/employee/class/attendance?classId=${class.id}&date=${attendanceDate}}">Trở lại</a>
+<div th:if="${error}">
+    <p th:text="${error}" style="color: red;"></p>
+</div>
+
+<div th:if="${success}">
+    <p th:text="${success}" style="color: green;"></p>
+</div>
 </body>
 </html>
