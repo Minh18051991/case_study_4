@@ -15,4 +15,8 @@ public interface IScoreRepository extends JpaRepository<Score, Integer> {
     List<ScoreDTO> findAllScore();*/
 
     List<ScoreDTO> findAllScoreByStudentId(Integer studentId);
+    List<Score> findByStudentId(Integer studentId);
+    List<Score> findByModuleId(Integer moduleId);
+    Score findByStudentIdAndModuleId(Integer studentId, Integer moduleId);
 }
+

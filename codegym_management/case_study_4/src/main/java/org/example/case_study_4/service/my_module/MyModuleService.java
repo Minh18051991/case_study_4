@@ -33,10 +33,6 @@ public class MyModuleService implements IMyModuleService {
         return moduleRepository.findByCourseIdAndIsDeleteFalse(courseId);
     }
 
-    public List<MyModule> findByCourseId(Integer courseId) {
-        return moduleRepository.findByCourseId(courseId);
-    }
-
     @Override
     public Optional<MyModule> findActiveById(Integer moduleId) {
         return moduleRepository.findByIdAndIsDeleteFalse(moduleId);
@@ -48,4 +44,15 @@ public class MyModuleService implements IMyModuleService {
            moduleRepository.save(module);
        });
     }
+
+    @Override
+    public List<MyModule> findModulesByCourseId(Integer courseId) {
+        return moduleRepository.findByCourseId(courseId);
+    }
+
+    @Override
+    public Optional<MyModule> findActiveModuleById(Integer moduleId) {
+        return moduleRepository.findByIdAndIsDeleteFalse(moduleId);
+    }
+
 }
