@@ -23,14 +23,13 @@ public class ProgressService implements IProgressService {
     }
 
     @Override
-    public Progress findByActivityIdAndStudentIdAndStatus(Integer activityId, Integer studentId, Boolean status) {
-        return progressRepository.findByActivityIdAndStudentIdAndStatus(activityId, studentId, status);
+    public Progress findById(int id) {
+        return progressRepository.findById(id).orElse(null);
     }
 
     @Override
     public Progress findByActivityIdAndStudentId(Integer activityId, Integer studentId) {
         return progressRepository.findByActivityIdAndStudentId(activityId, studentId);
     }
-
 
 }

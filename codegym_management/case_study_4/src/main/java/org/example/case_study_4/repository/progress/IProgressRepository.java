@@ -15,8 +15,5 @@ public interface IProgressRepository extends JpaRepository<Progress, Integer> {
             "            WHERE a.lesson_id = :lessonId", nativeQuery = true)
     List<ProgressDTO> findAllByLessonIdAndStudentId(@Param("studentId") Integer studentId, @Param("lessonId") Integer lessonId);
 
-    Progress findByActivityIdAndStudentIdAndStatus(Integer activityId, Integer studentId, Boolean status);
-
     Progress findByActivityIdAndStudentId(Integer activityId, Integer studentId);
-
 }

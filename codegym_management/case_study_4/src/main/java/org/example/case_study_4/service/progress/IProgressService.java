@@ -10,7 +10,7 @@ public interface IProgressService {
 
     void saveProgress(Progress progress);
 
-    Progress findByActivityIdAndStudentIdAndStatus(Integer activityId, Integer studentId, Boolean status);
+    Progress findById(int id);
 
     Progress findByActivityIdAndStudentId(Integer activityId, Integer studentId);
 }

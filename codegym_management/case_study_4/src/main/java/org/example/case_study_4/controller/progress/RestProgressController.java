@@ -1,9 +1,11 @@
 package org.example.case_study_4.controller.progress;
 
 import org.example.case_study_4.dto.progressDto.UpdateProgress;
+import org.example.case_study_4.model.Account;
 import org.example.case_study_4.model.Activity;
 import org.example.case_study_4.model.Progress;
 import org.example.case_study_4.model.Student;
+import org.example.case_study_4.service.account.IAccountSer;
 import org.example.case_study_4.service.activi.IActivitySer;
 import org.example.case_study_4.service.studentL.IStudentSer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,45 +14,45 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.example.case_study_4.service.progress.IProgressService;
 
+import java.security.Principal;
+
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/progress")
 public class RestProgressController {
     @Autowired
+    private IProgressService progressService;
+    @Autowired
     private IStudentSer studentSer;
     @Autowired
     private IActivitySer activitySer;
     @Autowired
-    private IProgressService progressService;
+    private IAccountSer accountSer;
 
     @PostMapping("/updateStatus")
-    public ResponseEntity<?> updateProgressStatus(@RequestBody UpdateProgress updateProgress) {
+    public ResponseEntity<?> updateProgressStatus(@RequestBody UpdateProgress updateProgress, Principal principal) {
+        String username = principal.getName();
 
-        System.out.println("--------------------");
-        System.out.println("activityId" + updateProgress.getActivityId());
+        Account account = accountSer.getAccount(username);
+        Student student = studentSer.findByAccount(account);
 
-        Progress progress = progressService.findByActivityIdAndStudentId(updateProgress.getActivityId(), updateProgress.getStudentId());
+        Integer studentId = student.getId();
+        Progress progress = progressService.findByActivityIdAndStudentId(updateProgress.getActivityId(), studentId);
+
         if (progress != null) {
             progress.setStatus(updateProgress.getStatus());
             progressService.saveProgress(progress);
             return new ResponseEntity<>(progress, HttpStatus.OK);
         } else {
             Progress newProgress = new Progress();
-            newProgress.setStatus(updateProgress.getStatus());
-            Student student = studentSer.findById(updateProgress.getStudentId());
-            if (student == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            newProgress.setStudent(student);
+            newProgress.setStatus(true);
+            Student student1 = studentSer.findById(studentId);
+            newProgress.setStudent(student1);
             Activity activity = activitySer.findById(updateProgress.getActivityId());
-            if (activity == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
             newProgress.setActivity(activity);
             progressService.saveProgress(newProgress);
-            return new ResponseEntity<>(newProgress,HttpStatus.OK);
-
+            return new ResponseEntity<>(newProgress, HttpStatus.OK);
         }
     }
 
