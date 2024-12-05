@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Activity</title>
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+</head>
+<body>
+<div th:insert="_header :: header"></div>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Edit Activity</h1>
+    <form th:action="@{/activities/edit/{id}(id=${activity.id})}" th:object="${activity}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Activity Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" th:field="*{category.id}" required>
+                <option value="">Select a category</option>
+                <option th:each="cat : ${categories}"
+                        th:value="${cat.id}"
+                        th:text="${cat.name}"
+                        th:selected="${cat.id == activity.category.id}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Activity</button>
+        <a th:href="@{/lessons/view/{lessonId}(lessonId=${activity.lesson.id})}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<th:block th:replace="_footer :: footer"></th:block>
+</body>
+</html>

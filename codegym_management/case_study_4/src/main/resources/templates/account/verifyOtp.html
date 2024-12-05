@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác thực OTP</title>
+    <!-- Bootstrap CSS -->
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .otp-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .otp-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .error-message {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="_header :: header"></div>
+
+<div class="container">
+    <div class="otp-form">
+        <h2>Xác thực OTP</h2>
+        <form action="/accounts/confirm-otp" method="post">
+            <div class="mb-3">
+                <label for="otp" class="form-label">Nhập mã OTP:</label>
+                <input type="text" class="form-control" id="otp" name="otp" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </form>
+        <p th:if="${error}" class="error-message" th:text="${error}"></p>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+
+
+<th:block th:replace="_footer :: footer"></th:block>
+</body>
+</html>
