@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface ClassesRepository extends JpaRepository<Classes, Integer> {
 
-    @Query("SELECT c FROM Classes c WHERE c.employee.id = ?1")
     List<Classes> findByEmployeeId(Integer employeeId);
 
     boolean existsByIdAndEmployeeId(Integer classId, Integer employeeId);
+
 }

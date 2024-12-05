@@ -4,7 +4,7 @@ import org.example.case_study_4.model.Classes;
 import org.example.case_study_4.model.DailyNote;
 import org.example.case_study_4.service.classes.IClassService;
 import org.example.case_study_4.service.daily_note.IDailyNoteService;
-import org.example.case_study_4.service.employeeService.IEmployeeService;
+import org.example.case_study_4.service.employee.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

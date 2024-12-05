@@ -24,6 +24,12 @@ public class ClassService implements IClassService {
     }
 
     @Override
+    public List<Classes> findAll() {
+        return classRepository.findAll();
+    }
+
+
+    @Override
     public boolean isTeacherAssignedToClass(Integer employeeId, Integer classId) {
 
         Classes classEntity = classRepository.findById(classId).orElse(null);
@@ -35,6 +41,12 @@ public class ClassService implements IClassService {
 
     @Override
     public Classes getClassById(Integer classId) {
+
         return classRepository.findById(classId).orElse(null);
+    }
+
+    @Override
+    public List<Classes> getAllClasses() {
+        return List.of();
     }
 }

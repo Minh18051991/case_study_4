@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress</title>
+    <th:block th:replace="~{/layout/layout::library}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{_header}"></th:block>
+
+<div class="container my-5">
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Tên Hoạt Động</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="progress, status : ${progressList}">
+            <td th:text="${status.count}"></td>
+            <td th:text="${progress.getActivityName()}"></td>
+                <td>
+                    <form action="/progress/updateStatus" method="post">
+                    <input type="hidden" name="studentId" th:value="${1}">
+                    <input type="hidden" name="activityId" th:value="${progress.getActivityId()}">
+                    <input type="hidden" name="progressId" th:value="${progress.getProgressId()}">
+                    <input type="checkbox" name="status" th:checked="${progress.getProgressStatus()}"
+                           onchange="this.form.submit()"/>
+                    </form>
+                </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<th:block th:replace="~{_footer}"></th:block>
+</body>
+</html>

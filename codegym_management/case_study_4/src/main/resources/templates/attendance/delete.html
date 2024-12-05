@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xoá điểm danh</title>
+</head>
+<body>
+<h1>xoá điểm danh lớp: <span th:text="${class.name}"></span></h1>
+<h2>điểm danh lớp ngày: <span th:text="${attendanceDate}"></span></h2>
+<form action="#"
+      th:action="@{/employee/class/{classId}/attendance/delete/{attendanceId}(classId=${class.id}, attendanceId=${attendance.id})}"
+      method="post">
+    <input type="hidden" th:name="classId" th:value="${class.id}">
+    <input type="hidden" th:name="attendanceId" th:value="${attendance.id}">
+    <p>bạn có muốn xoá điểm danh này không</p>
+    <button type="submit">xoá điểm danh</button>
+    <a href="#" th:href="@{/employee/class/attendance(classId=${class.id}, date=${attendanceDate})}">chọn</a>
+</form>
+</body>
+</html>

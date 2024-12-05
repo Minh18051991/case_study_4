@@ -7,8 +7,15 @@ import java.util.List;
 
 public interface IClassService {
     List<Student> findStudentsByClass(Integer classId);
+    List<Classes> findAll();
 
     boolean isTeacherAssignedToClass(Integer employeeId, Integer classId);
 
+
     Classes getClassById(Integer classId);
+
+    List<Classes> getAllClasses();
+
+
+
 }

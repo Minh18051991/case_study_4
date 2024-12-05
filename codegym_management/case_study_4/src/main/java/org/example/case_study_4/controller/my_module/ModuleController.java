@@ -1,6 +1,6 @@
 package org.example.case_study_4.controller.my_module;
 
-import org.example.case_study_4.my_module_dto.ResponseModuleDto;
+import org.example.case_study_4.dto.my_module_dto.ResponseModuleDto;
 import org.example.case_study_4.service.my_module.IMyModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

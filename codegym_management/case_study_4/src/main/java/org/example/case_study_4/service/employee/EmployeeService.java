@@ -1,4 +1,4 @@
-package org.example.case_study_4.service.employeeService;
+package org.example.case_study_4.service.employee;
 
 import org.example.case_study_4.model.Classes;
 import org.example.case_study_4.model.Employee;
