@@ -22,7 +22,7 @@
     <h1 class="mb-4">Lessons for Module: <span th:text="${module.name}"></span></h1>
     <a th:href="@{/lessons/create/{moduleId}(moduleId=${module.id})}" class="btn btn-primary mb-3">Create New Lesson</a>
     <div class="list-group">
-        <div th:each="lesson : ${module.lessons}" class="list-group-item">
+        <div th:each="lesson : ${lessons}" class="list-group-item">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 th:text="${lesson.name}" class="mb-1"></h5>
                 <button class="btn btn-link toggle-activities">Show Activities</button>
