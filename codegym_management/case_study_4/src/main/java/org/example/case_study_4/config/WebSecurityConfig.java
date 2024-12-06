@@ -63,10 +63,10 @@ public class WebSecurityConfig {
                 .requestMatchers("/create","/score/list_score","/attendances/status","/module/list_module","/lessons/detail","progress/detail","/api/progress/updateStatus").hasRole("STUDENT"));
        // cấp quyền cho user và admin
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/admin","/login-success","/employees","/employees/add-form","/employees/create","/courses","/courses/create","/courses/delete/{id}","/courses/view/{id}","/courses/edit/{id}","/student-score/classes").hasRole("ADMIN"));
+                .requestMatchers("/admin","/login-success","/employees","/employees/add-form","/employees/create","/courses","/courses/create","/courses/delete/{id}","/courses/view/{id}","/courses/edit/{id}","/lessons/modules/{id}","/courses/modules/{id}","/activities/create/{id}","/lessons/create/{id}","/lessons/modules/{id}","/activities/create/{id}","activities/edit/{id}","/modules/create/{id}").hasRole("ADMIN"));
         //cấp quyền cho ao
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/classes","/classes/create","/classes/edit{id}","/classes/list_student","/classes/{id}/add-student","/classes/delete/{id}").hasRole("AO"));
+                .requestMatchers("/classes","/classes/create","/classes/edit{id}","/classes/list_student","/classes/{id}/add-student","/classes/delete/{id}","/student-scores/classes/{id}","/student-scores/classes","student-scores/student/{id}","/student-scores/add-score","/student-scores/save-score").hasRole("AO"));
         //cấp quyền cho teacher
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/").hasRole("TEACHER"));
