@@ -2,20 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Module List</title>
+    <title>Danh sách module</title>
     <th:block th:replace="~{layout/layout::library}"></th:block>
 </head>
 <body>
 <div th:insert="_header :: header"></div>
 
 <div class="container mt-5">
-    <h1 class="mb-4">Modules for Course: <span th:text="${courseName}"></span></h1>
+    <h1 class="mb-4">Modules của khóa học: <span th:text="${courseName}"></span></h1>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>Tên</th>
+                <th>Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -23,16 +23,16 @@
                 <td th:text="${module.id}"></td>
                 <td th:text="${module.name}"></td>
                 <td>
-                    <a th:href="@{/modules/view/{id}(id=${module.id})}" class="btn btn-info btn-sm">View</a>
-                    <a th:href="@{/modules/edit/{id}(id=${module.id})}" class="btn btn-warning btn-sm">Edit</a>
+                    <a th:href="@{/modules/view/{id}(id=${module.id})}" class="btn btn-info btn-sm">Xem</a>
+                    <a th:href="@{/modules/edit/{id}(id=${module.id})}" class="btn btn-warning btn-sm">Sửa</a>
                     <a th:href="@{/modules/delete/{id}(id=${module.id})}" class="btn btn-danger btn-sm"
-                       onclick="return confirm('Are you sure you want to delete this module?')">Delete</a>
+                       onclick="return confirm('Are you sure you want to delete this module?')">Xóa</a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a th:href="@{/modules/create/{courseId}(courseId=${courseId})}" class="btn btn-primary">Add New Module</a>
-    <a th:href="@{/courses}" class="btn btn-secondary">Back to Courses</a>
+    <a th:href="@{/modules/create/{courseId}(courseId=${courseId})}" class="btn btn-primary">Thêm mới module</a>
+    <a th:href="@{/courses}" class="btn btn-secondary">Quay lại</a>
 </div>
 
 <th:block th:replace="_footer :: footer"></th:block>
