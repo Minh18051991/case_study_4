@@ -1,47 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách lớp học</title>
     <th:block th:replace="~{/layout/layout::library}"></th:block>
+    <!-- Sử dụng Bootstrap từ CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJtJr0A7Bsfj3a2DChjv2g5hGtnm6nz0uL1OIS6OYB3xx2YF0foYz97F/CT0" crossorigin="anonymous">
 
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
         .message {
-            color: red;
+            color: #d9534f;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .card-title {
+            font-size: 1.25rem;
             font-weight: bold;
         }
         .btn-back {
             margin-top: 20px;
             font-weight: bold;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-back:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .card-body {
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
         }
     </style>
 </head>
 <body>
+<!-- Header section -->
 <th:block th:replace="~{_header}"></th:block>
 
 <div class="container my-5">
     <h1 class="text-center mb-4">Chào mừng, Giảng viên</h1>
-    <h2 class="mb-4">Lớp học của bạn:</h2>
+    <h2 class="mb-4 text-center">Danh sách lớp học của bạn:</h2>
+
+    <!-- Hiển thị thông báo nếu có -->
     <div th:if="${message}" class="message text-center" th:text="${message}"></div>
-    <div class="row">
-        <div class="col-md-6 col-lg-4" th:each="class : ${classes}">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${class.name}">Lớp học</h5>
-                    <a th:href="@{/employee/class/{classId}/diary(classId=${class.id})}" class="btn btn-primary">Xem nhật ký lớp học</a>
-                    <a th:href="@{/employee/class/attendance(classId=${class.id})}" class="btn btn-primary"> Điểm danh </a>
-                </div>
+
+    <<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    <div class="col mb-4" th:each="class : ${classes}">
+        <div class="card shadow-sm border-0 rounded">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${class.name}">Lớp học</h5>
+                <p class="card-text">Thông tin về lớp học.</p>
+
+                <a th:href="@{/employee/class/diary(classId=${class.id})}" class="btn btn-primary mb-2 w-100">Xem nhật ký lớp học</a>
+                <a th:href="@{/employee/class/attendance(classId=${class.id})}" class="btn btn-secondary w-100">Điểm danh</a>
+                <a th:href="@{/student/list(classId=${classId}, employeeId=${employeeId})}" class="btn btn-info mb-2 w-100">Danh sách học sinh</a>
             </div>
         </div>
     </div>
-
+</div>
     <div class="text-center">
         <a href="#" class="btn btn-secondary btn-back">Quay lại</a>
     </div>
 </div>
 
+<!-- Script Bootstrap và Popper -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb3k2pPsdj3xCxDbT6kP5kHww8Vep9iB0P+J9qk2tQ7f7c6aF" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0u7z9th3eMO2t7kaU2t0ApY5vZT52lWWbXmrccAf/KvKteS6" crossorigin="anonymous"></script>
 </body>

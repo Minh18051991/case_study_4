@@ -1,79 +1,114 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tạo Nhật Ký Mới</title>
-    <th:block th:replace="~{/layout/layout::library}"></th:block>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJtJr0A7Bsfj3a2DChjv2g5hGtnm6nz0uL1OIS6OYB3xx2YF0foYz97F/CT0" crossorigin="anonymous">
-
+    <!-- Liên kết Bootstrap từ CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        .card {
-            transition: transform 0.2s ease-in-out;
+        body {
+            background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .form-label {
-            font-weight: bold;
-        }
-
-        .form-textarea {
-            height: 200px;
-        }
-
-        .btn-submit {
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-        }
-
-        .btn-back {
-            margin-top: 15px;
-            font-size: 1rem;
-        }
-
-        .content-container {
-            margin-top: 50px;
+        .container {
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+        }
+
+        h2 {
+            color: #007bff; /* Màu xanh dương cho tiêu đề */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary, .btn-secondary {
+            border-radius: 5px; /* Bo góc cho nút */
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Màu tối hơn khi hover */
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Màu tối hơn khi hover */
+        }
+
+        .alert-warning {
+            border-radius: 5px;
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        /* Cải thiện khoảng cách giữa các phần tử trong form */
+        .form-control {
+            border-radius: 5px;
+            height: 150px;
+            font-size: 16px;
+        }
+
+        /* Nút Quay lại */
+        .btn-back {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268;
         }
     </style>
 </head>
 <body>
-<th:block th:replace="~{_header}"></th:block>
+<div class="container mt-5">
+    <h2>Tạo Nhật Ký Mới cho Lớp: <span th:text="${class.name}">Tên lớp</span></h2>
 
-<div class="content-container">
-    <div class="card mb-4">
-        <div class="card-body">
-            <h1 class="card-title text-center">Tạo Nhật Ký Mới</h1>
-            <h3 class="text-center">Lớp học: <span th:text="${class.name}"></span></h3>
+    <!-- Hiển thị thông báo nếu có -->
+    <div th:if="${message}" class="alert alert-warning" role="alert">
+        <span th:text="${message}"></span>
+    </div>
+
+    <!-- Form tạo nhật ký -->
+    <form th:action="@{/employee/class/diary/create(classId=${class.id})}" method="post">
+        <div class="form-group">
+            <label for="content">Nội dung nhật ký</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
         </div>
-    </div>
 
-    <div class="card">
-        <div class="card-body">
-            <form th:action="@{/employee/class/{classId}/diary/create(classId=${class.id})}" method="post">
-                <div class="mb-3">
-                    <label for="content" class="form-label">Nội dung:</label>
-                    <textarea id="content" name="content" class="form-control form-textarea" required></textarea>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-submit">Tạo nhật ký</button>
-                </div>
-            </form>
+        <!-- Nút Lưu và Quay lại -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Lưu Nhật Ký</button>
+            <a th:href="@{/employee/class/diary(classId=${class.id})}" class="btn btn-secondary btn-back">Quay lại</a>
         </div>
-    </div>
 
-    <div class="text-center mt-4">
-        <a th:href="@{/employee/class/{classId}/diary(classId=${class.id})}" class="btn btn-link btn-back">Quay lại danh sách nhật ký</a>
-    </div>
+    </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb3k2pPsdj3xCxDbT6kP5kHww8Vep9iB0P+J9qk2tQ7f7c6aF" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0u7z9th3eMO2t7kaU2t0ApY5vZT52lWWbXmrccAf/KvKteS6" crossorigin="anonymous"></script>
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
