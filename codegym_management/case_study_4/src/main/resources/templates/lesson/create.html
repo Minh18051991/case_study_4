@@ -9,20 +9,18 @@
 <div th:insert="_header :: header"></div>
 
 <div class="container mt-5">
-    <h1 class="mb-4">Create New Lesson</h1>
+    <h1 class="mb-4">Tạo bài học mới</h1>
 
     <form th:action="@{/lessons/create/{moduleId}(moduleId=${moduleId})}" th:object="${lesson}" method="post">
         <div class="mb-3">
-            <label for="name" class="form-label">Lesson Name</label>
+            <label for="name" class="form-label">Tên bài học </label>
             <input type="text" class="form-control" id="name" th:field="*{name}" required>
         </div>
 
         <!-- Thêm các trường khác của Lesson nếu cần -->
 
-
-
-        <button type="submit" class="btn btn-primary">Create Lesson</button>
-        <a th:href="@{/lessons/module/{moduleId}(moduleId=${moduleId})}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Tạo bài học</button>
+        <a th:href="@{/lessons/modules/{moduleId}(moduleId=${moduleId})}" class="btn btn-secondary">Hủy</a>
     </form>
 </div>
 
