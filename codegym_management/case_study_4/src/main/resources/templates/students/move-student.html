@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chuyển lớp học sinh</title>
+</head>
+<body>
+<h2>Chuyển lớp học sinh</h2>
+
+<!--<div th:if="${error}">-->
+<!--    <p style="color: red;" th:text="${error}"></p>-->
+<!--</div>-->
+<!--<div th:if="${success}">-->
+<!--    <p style="color: green;" th:text="${success}"></p>-->
+<!--</div>-->
+
+<form th:action="@{/classes/{}/" method="post">
+    <input type="hidden" name="classId" th:value="${currentClass.id}" />
+    <input type="hidden" name="studentId" th:value="${student.id}" />
+
+    <h3>Thông tin lớp hiện tại:</h3>
+    <p th:text="'Tên lớp: ' + ${currentClass.name}"></p>
+    <p th:text="'Tên học sinh: ' + ${student.name}"></p>
+
+    <label for="newClassId">Chọn lớp mới:</label>
+    <select name="newClassId" id="newClassId">
+        <option th:each="class : ${allClasses}"
+                th:value="${class.id}"
+                th:text="${class.name}"></option>
+    </select>
+
+    <br><br>
+    <button type="submit">Chuyển lớp</button>
+</form>
+</body>
+</html>

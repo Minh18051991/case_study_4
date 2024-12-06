@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sinh Viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<!--/*@thymesVar id="error" type="templates"*/-->
+<div th:if="${error}">
+    <div class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+</div>
+<div class="container mt-5">
+    <h1>Thêm Sinh Viên Vào Lớp</h1>
+    <form th:action="@{/classes/{id}/add-student(id=${classes.id})}" method="post" th:object="${students}">
+        <input type="hidden" th:value="${students.id}" name="id">
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên Sinh viên:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại:</label>
+            <input type="text" id="phone" th:field="*{phone}" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ:</label>
+            <input type="text" id="address" th:field="*{address}" class="form-control" required>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Thêm sinh viên vào lớp</button>
+            <a class="btn btn-secondary" th:href="@{/classes/students(classId=${classes.id})}">Trở về danh sách sinh viên</a>
+
+        </div>
+    </form>
+
+    <br/>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -430,18 +430,3 @@ values ('Student 1', '1234@gmail', 1, 'Hà Nội', '0123456789', '1990-01-01', '
        ('Student 2', '1235@gmail', 1, 'Hà Nội', '0123456789', '1990-01-01', 'https://www.google.com', 1),
        ('Student 3', '1236@gmail', 1, 'Hà Nội', '0123456789', '1990-01-01', 'https://www.google.com', 1),
        ('Student 4', '1237@gmail', 1, 'Hà Nội', '0123456789', '1990-01-01', 'https://www.google.com', 1);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

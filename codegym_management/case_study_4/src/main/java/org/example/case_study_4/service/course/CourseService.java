@@ -34,7 +34,12 @@ public class CourseService implements ICourseService {
 
     @Override
     public List<Course> findAll() {
-        return courseRepository.findAll();
+        return courseRepository.findAllByIsDeleteFalse(); // Lọc các khóa học chưa bị xóa
+    }
+
+    @Override
+    public Course findById(int id) {
+        return courseRepository.findById(id);
     }
 
     @Override
@@ -118,7 +123,6 @@ public class CourseService implements ICourseService {
                 .orElseThrow(() -> new EntityNotFoundException("Course not found"));
         existingCourse.setName(updatedCourse.getName());
         existingCourse.setDuration(updatedCourse.getDuration());
-        // Update other fields as necessary
         return courseRepository.save(existingCourse);
     }
 
@@ -128,7 +132,6 @@ public class CourseService implements ICourseService {
         MyModule existingModule = moduleRepository.findById(moduleId)
                 .orElseThrow(() -> new EntityNotFoundException("Module not found"));
         existingModule.setName(updatedModule.getName());
-        // Update other fields as necessary
         return moduleRepository.save(existingModule);
     }
 
@@ -138,7 +141,6 @@ public class CourseService implements ICourseService {
         Lesson existingLesson = lessonRepository.findById(lessonId)
                 .orElseThrow(() -> new EntityNotFoundException("Lesson not found"));
         existingLesson.setName(updatedLesson.getName());
-        // Update other fields as necessary
         return lessonRepository.save(existingLesson);
     }
 
@@ -148,7 +150,6 @@ public class CourseService implements ICourseService {
         Activity existingActivity = activityRepository.findById(activityId)
                 .orElseThrow(() -> new EntityNotFoundException("Activity not found"));
         existingActivity.setName(updatedActivity.getName());
-        // Update other fields as necessary
         return activityRepository.save(existingActivity);
     }
 }

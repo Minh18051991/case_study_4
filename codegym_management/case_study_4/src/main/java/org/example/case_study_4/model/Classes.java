@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "class")
 @Getter
 @Setter
+
 public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +31,5 @@ public class Classes {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
 }
