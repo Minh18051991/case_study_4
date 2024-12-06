@@ -18,17 +18,14 @@ public class StudentService implements IStudent {
         this.studentRepository = studentRepository;
     }
 
-    // Lấy danh sách sinh viên theo classId
     @Override
     public List<Student> getStudentsByClassId(Integer classId) {
         // Trả về danh sách sinh viên có classId tương ứng
         return studentRepository.findByClassEntity_Id(classId);
     }
 
-    // Find by studentId: Tìm một sinh viên theo ID
     @Override
     public Optional<Student> findById(Integer studentId) {
-        // Trả về một Optional<Student> thay vì List
         return studentRepository.findById(studentId);
     }
 

@@ -66,13 +66,11 @@
 
                 <a th:href="@{/employee/class/diary(classId=${class.id})}" class="btn btn-primary mb-2 w-100">Xem nhật ký lớp học</a>
                 <a th:href="@{/employee/class/attendance(classId=${class.id})}" class="btn btn-secondary w-100">Điểm danh</a>
-                <a th:href="@{/student/class/{classId}/employee/{employeeId}}" class="btn btn-info mb-2 w-100">Danh sách học sinh</a>
+                <a th:href="@{/student/list(classId=${classId}, employeeId=${employeeId})}" class="btn btn-info mb-2 w-100">Danh sách học sinh</a>
             </div>
         </div>
     </div>
 </div>
-
-    <!-- Nút quay lại -->
     <div class="text-center">
         <a href="#" class="btn btn-secondary btn-back">Quay lại</a>
     </div>

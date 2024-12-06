@@ -10,6 +10,7 @@
 <div class="container mt-5">
     <h2>Quản Lý Điểm Danh Lớp: <span th:text="${class.name}">Tên lớp</span></h2>
 
+    <!-- Hiển thị thông báo lỗi nếu có -->
     <div th:if="${error}" class="alert alert-danger" role="alert">
         <span th:text="${error}"></span>
     </div>
@@ -21,33 +22,32 @@
         <div class="card-body">
             <form th:action="@{/employee/class/attendance/create}" method="post">
                 <input type="hidden" name="classId" th:value="${class.id}"/>
+                <input type="hidden" name="attendanceDate" th:value="${attendanceDate}"/>
 
-                <div class="form-group">
-                    <label for="attendanceDate">Ngày Điểm Danh</label>
-                    <input type="date" class="form-control" id="attendanceDate" name="attendanceDate" required />
-                </div>
-
-                <div th:each="student : ${students}">
-                    <div class="form-row">
-                        <div class="col-md-6 form-group">
-                            <label th:for="'status_' + ${student.id}">Trạng Thái của <span th:text="${student.name}"></span></label>
-                            <select class="form-control" th:id="'status_' + ${student.id}" name="status[${student.id}]">
-                                <option value="P">Có mặt</option>
-                                <option value="A">Vắng</option>
-                                <option value="L">Muộn</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label th:for="'note_' + ${student.id}">Ghi Chú</label>
-                            <input type="text" class="form-control" th:id="'note_' + ${student.id}" name="note[${student.id}]"/>
+                <div class="form-section">
+                    <h4>Select Present Students:</h4>
+                    <div th:each="student : ${students}">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="presentStudents"
+                                           th:value="${student.id}" id="student-[[${student.id}]]">
+                                    <label class="form-check-label" for="student-[[${student.id}]]"
+                                           th:text="${student.name}"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <textarea name="note" class="form-control note-textarea"
+                                              th:id="'note-' + ${student.id}"
+                                              placeholder="Enter notes for this student"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Nút lưu -->
-                <button type="submit" class="btn btn-primary">Lưu Điểm Danh</button>
-                <a href="#" class="btn btn-secondary ml-2" th:href="@{/employee/class/attendance}">Quay lại</a>
+                <button type="submit" class="btn btn-success btn-custom">Save Attendance</button>
             </form>
         </div>
     </div>

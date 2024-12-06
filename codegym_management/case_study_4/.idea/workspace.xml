@@ -5,30 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97c878f3-053b-4c04-9834-e786e0f3b57e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/attendance/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/attendance/AttendanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/attendance/AttendanceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/course/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/course/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/employee/EmployeeViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/employee/EmployeeViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/student/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/student/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/repository/student/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/repository/student/StudentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/attendance/AttendanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/attendance/AttendanceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/attendance/IAttendanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/attendance/IAttendanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/activity/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/activity/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/attendance/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/attendance/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/attendance/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/attendance/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/student/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/student/StudentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/attendance/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/attendance/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/attendance/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/attendance/update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/employee/create-diary.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/employee/create-diary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/employee/diary.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/employee/diary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/employee/employee.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/employee/employee.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/lesson/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/lesson/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733216180276</updated>
       <workItem from="1733216181238" duration="818000" />
-      <workItem from="1733415078155" duration="14019000" />
+      <workItem from="1733415078155" duration="18024000" />
     </task>
     <servers />
   </component>

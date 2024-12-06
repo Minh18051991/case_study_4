@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -16,17 +16,19 @@ import java.util.List;
 @RequestMapping("/student")
 public class StudentController {
 
-    private final StudentService studentService;
-    private final IClassService classesService;
+
 
     @Autowired
-    public StudentController(StudentService studentService, IClassService classesService) {
-        this.studentService = studentService;
-        this.classesService = classesService;
-    }
+    private StudentService studentService;
+    @Autowired
+    private IClassService classesService;
 
-    @GetMapping("class/{classId}/employee/{employeeId}")
-    public String viewStudents(@PathVariable Integer classId, @PathVariable Integer employeeId, Model model) {
+
+
+
+    @GetMapping("/list")
+    public String viewStudents(@RequestParam(required = true) Integer classId,
+                               @RequestParam(required = true) Integer employeeId, Model model) {
         if (!classesService.isTeacherAssignedToClass(employeeId, classId)) {
             model.addAttribute("message", "Giảng viên không phụ trách lớp học này.");
             return "student/error";
@@ -39,6 +41,7 @@ public class StudentController {
         model.addAttribute("students", students);
         model.addAttribute("classId", classId);
         model.addAttribute("employeeId", employeeId);
+
         return "student/list";
     }
 }
