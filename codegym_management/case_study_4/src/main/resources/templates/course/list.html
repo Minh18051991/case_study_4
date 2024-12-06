@@ -4,54 +4,25 @@
     <meta charset="UTF-8">
     <title>Course List</title>
     <th:block th:replace="~{layout/layout::library}"></th:block>
-    <style>
-        .course-card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .card-title {
-            color: #007bff;
-            font-weight: bold;
-        }
-        .btn-custom {
-            margin-right: 5px;
-        }
-        .create-btn {
-            margin-bottom: 30px;
-        }
-    </style>
 </head>
-<body class="bg-light">
+<body>
 <div th:insert="_header :: header"></div>
 
 <div class="container mt-5">
-    <h1 class="mb-4 text-center text-primary">Courses</h1>
-    <div class="d-flex justify-content-center mt-3 create-btn">
-        <a href="/courses/create" class="btn btn-primary btn-lg">
-            <i class="fas fa-plus-circle"></i> Create New Course
-        </a>
+    <h1 class="mb-4">Courses</h1>
+    <div class="d-flex justify-content-center mt-3">
+    <a href="/courses/create" class="btn btn-primary">Create New Course</a>
     </div>
     <div class="row">
         <div th:each="course : ${courses}" class="col-md-4 mb-4">
-            <div class="card course-card h-100">
-                <div class="card-body d-flex flex-column">
+            <div class="card">
+                <div class="card-body">
                     <h5 class="card-title" th:text="${course.name}"></h5>
-                    <p class="card-text flex-grow-1" th:text="${'Duration: ' + course.duration}"></p>
-                    <div class="mt-auto">
-                        <a th:href="@{/courses/modules/{id}(id=${course.id})}" class="btn btn-info btn-sm btn-custom">
-                            <i class="fas fa-eye"></i> View
-                        </a>
-                        <a th:href="@{/courses/edit/{id}(id=${course.id})}" class="btn btn-info btn-sm btn-custom">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                        <a th:href="@{/courses/delete/{id}(id=${course.id})}" class="btn btn-info btn-sm btn-custom"
-                           onclick="return confirm('Are you sure you want to delete this course?')">
-                            <i class="fas fa-trash-alt"></i> Delete
-                        </a>
-                    </div>
+                    <p class="card-text" th:text="${'Duration: ' + course.duration}"></p>
+                    <a th:href="@{/courses/view/{id}(id=${course.id})}" class="btn btn-primary mb-3">View</a>
+                    <a th:href="@{/courses/edit/{id}(id=${course.id})}" class="btn btn-primary mb-3">Edit</a>
+                    <a th:href="@{/courses/delete/{id}(id=${course.id})}" class="btn btn-primary mb-3"
+                       onclick="return confirm('Are you sure?')">Delete</a>
                 </div>
             </div>
         </div>
