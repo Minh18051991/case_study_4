@@ -55,21 +55,21 @@ public class WebSecurityConfig {
 
         // các đường dẫn không phải login
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers( "/login","login-success", "/logout", "/logoutSuccessful", "/403").permitAll().anyRequest().authenticated());
+                .requestMatchers( "/login","login-success", "/logout", "/logoutSuccessful", "/403").permitAll());
 //                .requestMatchers("/", "/login","login-success", "/logout", "/logoutSuccessful", "/403").permitAll());
         // cấp quyền cho student
 
-//        http.authorizeHttpRequests((authorize) -> authorize
-//                .requestMatchers("/create").hasRole("STUDENT"));
-//        // cấp quyền cho user và admin
-//        http.authorizeHttpRequests((authorize) -> authorize
-//                .requestMatchers("/admin").hasRole("ADMIN"));
-//        //cấp quyền cho ao
-//        http.authorizeHttpRequests((authorize) -> authorize
-//                .requestMatchers("/admin").hasRole("AO"));
-//        //cấp quyền cho teacher
-//        http.authorizeHttpRequests((authorize) -> authorize
-//                .requestMatchers("/admin").hasRole("TEACHER"));
+        http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/create","/score/list_score","/attendances/status","/module/list_module","/lessons/detail","progress/detail","/api/progress/updateStatus").hasRole("STUDENT"));
+       // cấp quyền cho user và admin
+        http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/admin","/login-success","/employees","/employees/add-form","/employees/create","/courses","/courses/create","/courses/delete/{id}","/courses/view/{id}","/courses/edit/{id}","/student-score/classes").hasRole("ADMIN"));
+        //cấp quyền cho ao
+        http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/classes","/classes/create","/classes/edit{id}","/classes/list_student","/classes/{id}/add-student","/classes/delete/{id}").hasRole("AO"));
+        //cấp quyền cho teacher
+        http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/").hasRole("TEACHER"));
 
 
         // cấu hình form login
