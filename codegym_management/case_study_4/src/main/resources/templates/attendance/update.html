@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cập nhật điểm danh</title>
+</head>
+<body>
+<h1>Cập nhật điểm danh</h1>
+<form action="/employee/class/attendance/update" method="POST" th:object="${attendance}">
+    <input type="text" name="classId" th:value="${classId}">
+    <input type="number" th:field="*{id}">
+    <input type="text" th:field="*{createAt}">
+    <input type="number" th:field="*{student.id}">
+    <input type="number" th:field="*{classEntity.id}">
+    <label for="status">Trạng thái:</label>
+    <input type="text" id="status" name="status" th:field="*{status}"><br>
+    <label for="note">Ghi chú:</label>
+    <textarea id="note" name="note" th:field="*{note}"></textarea><br>
+    <button type="submit">Cập nhật</button>
+</form>
+
+<a th:href="@{/employee/class/attendance?classId=${class.id}&date=${attendanceDate}}">Trở lại</a>
+</body>
+</html>

@@ -29,7 +29,7 @@ public class LessonController {
     private CategoryActivityService categoryActivityService;
 
 
-    @GetMapping("/module/{moduleId}")
+    @GetMapping("/modules/{moduleId}")
     public String viewModuleLessons(@PathVariable Integer moduleId, Model model) {
         MyModule module = moduleService.findById(moduleId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid module Id:" + moduleId));

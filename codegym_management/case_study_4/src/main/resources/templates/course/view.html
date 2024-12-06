@@ -48,7 +48,7 @@
                     <h5 class="card-title" th:text="${module.name}"></h5>
                     <p class="card-text">Module description or additional info can go here.</p>
                     <div class="mt-3">
-                        <a th:href="@{/lessons/module/{moduleId}(moduleId=${module.id})}" class="btn btn-info btn-sm btn-custom">
+                        <a th:href="@{/lessons/modules/{moduleId}(moduleId=${module.id})}" class="btn btn-info btn-sm btn-custom">
                             <i class="fas fa-eye"></i> View Lessons
                         </a>
                         <a th:href="@{/modules/edit/{moduleId}(moduleId=${module.id})}" class="btn btn-warning btn-sm btn-custom">
