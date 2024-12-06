@@ -10,15 +10,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/attendance/AttendanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/attendance/AttendanceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/student/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/student/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/repository/student/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/repository/student/StudentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/attendance/AttendanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/attendance/AttendanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/attendance/IAttendanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/attendance/IAttendanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/student/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/service/student/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/attendance/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/attendance/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/employee/diary.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/employee/diary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/employee/employee.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/employee/employee.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/lesson/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/case_study_4/controller/lesson/LessonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/course/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/course/view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/lesson/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/lesson/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/lesson/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/lesson/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/module/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/module/list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Minh18051991&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Minh18051991/case_study_4.git&quot;,
+    &quot;accountId&quot;: &quot;9ce69ef4-4380-4b14-8122-33dfe0b7ae2d&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -50,7 +61,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.CaseStudy4Application.executor": "Run",
-    "git-widget-placeholder": "hieu",
+    "git-widget-placeholder": "Merging hieu",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/democase/case_study_4/codegym_management/case_study_4",
     "node.js.detected.package.eslint": "true",
@@ -59,11 +70,6 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
-    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -78,8 +84,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
       </set>
     </attachedChunks>
   </component>
@@ -92,7 +98,8 @@
       <option name="presentableId" value="Default" />
       <updated>1733216180276</updated>
       <workItem from="1733216181238" duration="818000" />
-      <workItem from="1733415078155" duration="18024000" />
+      <workItem from="1733409367253" duration="1555000" />
+      <workItem from="1733447204225" duration="287000" />
     </task>
     <servers />
   </component>
