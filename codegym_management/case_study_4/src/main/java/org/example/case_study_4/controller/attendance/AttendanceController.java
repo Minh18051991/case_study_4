@@ -69,6 +69,22 @@ public class AttendanceController {
         return "attendance/list";
     }
 
+    @GetMapping("/attendance/create")
+    public String createAttendanceForm(@RequestParam Integer classId, Model model) {
+        // Kiểm tra lớp học
+        Classes classes = classService.getClassById(classId);
+        if (classes == null) {
+            model.addAttribute("error", "Không tìm thấy lớp học!");
+            return "error";
+        }
+
+        List<Student> students = studentRepository.findByClassEntity_Id(classId);
+        model.addAttribute("class", classes);
+        model.addAttribute("students", students);
+        return "attendance/create";
+    }
+
+
     @PostMapping("/create")
     public String createAttendance(@RequestParam Integer classId,
                                    @RequestParam(value = "attendanceDate", required = false) String attendanceDate,

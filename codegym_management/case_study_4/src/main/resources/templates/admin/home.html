@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+    <style>
+        body, html {
+            height: 70%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .full-screen-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="_header :: header"></div>
+<div class="content">
+
+
+    <img th:src="@{https://cdn.nhanlucnganhluat.vn/uploads/images/CC5D2D3D/logo/2019-11/68d6e0fa-42d1-11e8-9485-56c566ee3692.png}" alt="Full screen image" class="full-screen-image"/></div>
+<th:block th:replace="_footer :: footer"></th:block>
+</body>
+</html>

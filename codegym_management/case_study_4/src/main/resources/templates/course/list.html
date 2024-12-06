@@ -41,7 +41,7 @@
                     <h5 class="card-title" th:text="${course.name}"></h5>
                     <p class="card-text flex-grow-1" th:text="${'Duration: ' + course.duration}"></p>
                     <div class="mt-auto">
-                        <a th:href="@{/courses/modules/{id}(id=${course.id})}" class="btn btn-info btn-sm btn-custom">
+                        <a th:href="@{/courses/view/{id}(id=${course.id})}" class="btn btn-info btn-sm btn-custom">
                             <i class="fas fa-eye"></i> Xem
                         </a>
                         <a th:href="@{/courses/edit/{id}(id=${course.id})}" class="btn btn-info btn-sm btn-custom">
