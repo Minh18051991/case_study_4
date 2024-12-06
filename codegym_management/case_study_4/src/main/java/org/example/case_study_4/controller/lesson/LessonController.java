@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -28,11 +29,12 @@ public class LessonController {
     private CategoryActivityService categoryActivityService;
 
 
-    @GetMapping("/module/{moduleId}")
+    @GetMapping("/modules/{moduleId}")
     public String viewModuleLessons(@PathVariable Integer moduleId, Model model) {
         MyModule module = moduleService.findById(moduleId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid module Id:" + moduleId));
         List<Lesson> lessons = lessonService.findByModuleId(moduleId);
+        lessons.sort(Comparator.comparing(Lesson::getId));
         model.addAttribute("module", module);
         model.addAttribute("lessons", lessons);
         return "lesson/list";

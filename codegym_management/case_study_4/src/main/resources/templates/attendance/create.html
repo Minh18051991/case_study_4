@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Mới Điểm Danh</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Thêm Mới Điểm Danh Lớp: <span th:text="${class.name}">Tên lớp</span></h2>
+
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5>Thêm Mới Điểm Danh</h5>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/employee/class/attendance/create}" method="post">
+                <input type="hidden" name="classId" th:value="${class.id}"/>
+
+                <div class="form-group">
+                    <label for="attendanceDate">Ngày Điểm Danh</label>
+                    <input type="date" class="form-control" id="attendanceDate" name="attendanceDate" required />
+                </div>
+
+                <div th:each="student : ${students}">
+                    <div class="form-group">
+                        <label th:for="'status_' + ${student.id}">Trạng Thái của <span th:text="${student.name}"></span></label>
+                        <select class="form-control" th:id="'status_' + ${student.id}" name="status[${student.id}]">
+                            <option value="P">Có mặt</option>
+                            <option value="A">Vắng</option>
+                            <option value="L">Muộn</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="'note_' + ${student.id}">Ghi Chú</label>
+                        <input type="text" class="form-control" th:id="'note_' + ${student.id}" name="note[${student.id}]"/>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">Lưu Điểm Danh</button>
+                <a href="#" class="btn btn-secondary ml-2" th:href="@{/employee/class/attendance}">Quay lại</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

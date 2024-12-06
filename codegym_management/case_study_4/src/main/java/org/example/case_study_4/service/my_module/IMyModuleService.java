@@ -18,5 +18,9 @@ public interface IMyModuleService {
     Optional<MyModule> findActiveById(Integer moduleId);
 
     void softDelete(Integer id);
+
+    List<MyModule> findModulesByCourseId(Integer courseId);
+
+    Optional<MyModule> findActiveModuleById(Integer moduleId);
 }
 

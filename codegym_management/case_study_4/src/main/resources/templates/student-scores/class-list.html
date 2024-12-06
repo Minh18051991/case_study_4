@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách lớp học</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <th:block th:replace="~{layout/layout::library}"></th:block>
+</head>
+<body>
+<div th:insert="_header :: header"></div>
+    <div class="container mt-5">
+        <h2>Danh sách lớp học</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên lớp</th>
+                    <th>Khóa học</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="class : ${classes}">
+                    <td th:text="${class.id}"></td>
+                    <td th:text="${class.name}"></td>
+                    <td th:text="${class.course.name}"></td>
+                    <td>
+                        <a th:href="@{/student-scores/classes/{id}(id=${class.id})}" class="btn btn-primary">Xem học sinh</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center mt-3">
+            <a href="javascript:history.back()" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </div>
+    <th:block th:replace="_footer :: footer"></th:block>
+</body>
+</html>

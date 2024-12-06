@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Điểm Danh</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Quản Lý Điểm Danh Lớp: <span th:text="${class.name}">Tên lớp</span></h2>
+
+    <!-- Hiển thị thông báo lỗi nếu có -->
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Thêm Mới Điểm Danh</h5>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/employee/class/attendance/create}" method="post">
+                <input type="hidden" name="classId" th:value="${class.id}"/>
+                <input type="hidden" name="attendanceDate" th:value="${attendanceDate}"/>
+
+                <div class="form-section">
+                    <h4>Select Present Students:</h4>
+                    <div th:each="student : ${students}">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="presentStudents"
+                                           th:value="${student.id}" id="student-[[${student.id}]]">
+                                    <label class="form-check-label" for="student-[[${student.id}]]"
+                                           th:text="${student.name}"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <textarea name="note" class="form-control note-textarea"
+                                              th:id="'note-' + ${student.id}"
+                                              placeholder="Enter notes for this student"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-custom">Save Attendance</button>
+            </form>
+        </div>
+    </div>
+
+    <h3>Danh Sách Điểm Danh</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tên Sinh Viên</th>
+            <th scope="col">Trạng Thái</th>
+            <th scope="col">Ghi Chú</th>
+            <th scope="col">Hành Động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="attendance : ${attendanceList}">
+            <td th:text="${attendance.id}"></td>
+            <td th:text="${attendance.student.name}"></td>
+            <td>
+                <select class="form-control" name="status" th:value="${attendance.status}">
+                    <option value="P" th:selected="${attendance.status == 'P'}">Có mặt</option>
+                    <option value="A" th:selected="${attendance.status == 'A'}">Vắng</option>
+                    <option value="L" th:selected="${attendance.status == 'L'}">Muộn</option>
+                </select>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="note" th:value="${attendance.note}" />
+            </td>
+            <td>
+                <a th:href="@{/employee/class/attendance/employee/class/{classId}/attendance/update/{attendanceId}(classId=${class.id},attendanceId=${attendance.id})}"
+                   class="btn btn-warning btn-custom" title="Cập Nhật Điểm Danh">
+                    <i class="bi bi-pencil"></i> Cập Nhật
+                </a>
+                <form th:action="@{/employee/class/attendance/employee/class/{classId}/attendance/delete/{attendanceId}(classId=${class.id},attendanceId=${attendance.id})}"
+                      method="post" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bản ghi điểm danh này?')">
+                    <input type="hidden" name="attendanceDate" th:value="${attendanceDate}"/>
+                    <button type="submit" class="btn btn-danger btn-custom" title="Xóa Điểm Danh">
+                        <i class="bi bi-trash"></i> Xóa
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
